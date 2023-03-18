@@ -5,10 +5,6 @@ on:
   pull_request:
     branches: [ main ]
 
-  push:
-    branches:
-      - add-dbt-docs-hosting
-
   workflow_dispatch:
 
 permissions:
