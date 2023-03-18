@@ -1,0 +1,8 @@
+---
+default:
+  outputs:
+    dev:
+      type: duckdb
+      path: /src/billiam.duckdb
+
+  target: dev

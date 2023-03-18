@@ -1,0 +1,45 @@
+---
+name: billiam_database
+
+config-version: 2
+version: 0.0.0
+
+profile: default
+
+model-paths: [ "src/models" ]
+seed-paths: [ "src/seeds" ]
+test-paths: [ "src/tests" ]
+analysis-paths: [ "src/analysis" ]
+macro-paths: [ "src/macros" ]
+snapshot-paths: [ "src/snapshots" ]
+asset-paths: [ "src/assets" ]
+
+target-path: target
+log-path: logs
+packages-install-path: src/packages
+
+clean-targets: [ "target", "logs", "src/packages" ]
+
+require-dbt-version: [">=1.0.0", "<2.0.0"]
+
+models:
+  billiam_database:
+    staging:
+      +materialized: view
+      +schema: staging
+      +docs:
+        node_color: darkorange
+    intermediate:
+      +materialized: table
+      +schema: intermediate
+    presentation:
+      +materialized: table
+      +schema: presentation
+      +docs:
+        node_color: green
+
+seeds:
+  +docs:
+    node_color: gray
+  billiam_database:
+    +schema: raw

@@ -1,0 +1,8 @@
+---
+version: 2
+
+models:
+  - name: pl__daily_metrics
+    description: Daily metrics across both sources
+  - name: pl__transactions_cube
+    description: Transaction history rolled up into an OLAP cube.

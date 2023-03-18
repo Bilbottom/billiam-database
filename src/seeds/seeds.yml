@@ -1,0 +1,11 @@
+---
+version: 2
+
+# These should be sources and not seeds, but having issues getting the `source`
+# function to work with DuckDB
+
+seeds:
+  - name: finances
+    description: Item-level transaction history from 2018-01-18.
+  - name: daily_tracker
+    description: Work tracker history from 2019-04-23.

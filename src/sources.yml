@@ -1,0 +1,26 @@
+---
+version: 2
+
+sources:  # Can't get these to work with DuckDB?
+  - name: calendar
+    description: >
+      A set of calendar tables for date manipulation.
+      
+      This should plug into:
+      
+      - https://github.com/Bilbottom/sql-schema-models/tree/main/date-schema
+    database: billiam
+    schema: calendar
+    tables: []
+#  - name: finances
+#    description: Item-level transaction history from 2018-01-18.
+#    database: billiam
+#    schema: raw
+#    tables:
+#      - name: finances
+#  - name: daily-tracker
+#    description: Work tracker history from 2019-04-23.
+#    database: billiam
+#    schema: raw
+#    tables:
+#      - name: daily_tracker
