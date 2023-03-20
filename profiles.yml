@@ -3,6 +3,6 @@ default:
   outputs:
     dev:
       type: duckdb
-      path: /src/billiam.duckdb
+      path: /Users/bill.wallis/Repos/Billiam/billiam-database/src/billiam.duckdb
 
   target: dev
