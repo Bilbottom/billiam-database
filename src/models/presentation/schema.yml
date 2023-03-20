@@ -6,3 +6,5 @@ models:
     description: Daily metrics across both sources
   - name: pl__transactions_cube
     description: Transaction history rolled up into an OLAP cube.
+  - name: pl__task_details
+    description: Details and metrics about the tasks.
