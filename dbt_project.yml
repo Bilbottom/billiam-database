@@ -3,6 +3,7 @@ name: billiam_database
 
 config-version: 2
 version: 0.0.0
+require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 profile: default
 
@@ -16,11 +17,16 @@ asset-paths: [ "src/assets" ]
 
 target-path: target
 log-path: logs
-packages-install-path: src/packages
-
+packages-install-path: packages
 clean-targets: [ "target", "logs", "packages" ]
 
-require-dbt-version: [">=1.0.0", "<2.0.0"]
+dispatch:
+  - macro_namespace: dbt
+    search_order: ["dbt_project_evaluator", "dbt"]
+
+on-run-end:  # Find a better way to implement this conditional since we don't actually have a prod target
+  - "{% if target.name == 'prod' %}DROP SCHEMA IF EXISTS dbt_test__audit CASCADE;{% endif %}"
+
 
 models:
   billiam_database:
@@ -37,6 +43,10 @@ models:
       +schema: presentation
       +docs:
         node_color: green
+  elementary:
+    +schema: 'elementary'
+  dbt_project_evaluator:
+    +schema: 'dbt_project_evaluator'
 
 seeds:
   +docs:
