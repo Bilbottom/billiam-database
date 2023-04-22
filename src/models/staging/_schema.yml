@@ -3,7 +3,9 @@ version: 2
 
 models:
   - name: stg__daily_tracker
-    description: Work tracker history from 2019-04-23.
+    description: '{{ doc("stg__daily_tracker") }}'
+    meta:
+      source: https://github.com/Bilbottom/daily-tracker
     columns:
       - name: date_time
         data_type: timestamp
@@ -60,10 +62,10 @@ models:
           in a seed with the from- and to- employment dates.
         tests:
           - not_null
-#          - accepted_values:
-#              values: [ "TSB", "Jaja", "Allica", "Sainsbury's" ]
+          - accepted_values:
+              values: [ "TSB", "Jaja", "Allica", "Sainsbury''s" ]
   - name: stg__finances
-    description: Item-level transaction history from 2018-01-18.
+    description: '{{ doc("stg__finances") }}'
     columns:
       - name: row_id
         data_type: integer
