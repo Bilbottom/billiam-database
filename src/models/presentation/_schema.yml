@@ -99,7 +99,6 @@ models:
         description:
           The latest timestamp than an event was recorded for the task (or task
           and detail).
-  - name: int__transaction_items
   - name: pl__transactions_cube
     description: >
       Transaction history rolled up into an OLAP cube.
