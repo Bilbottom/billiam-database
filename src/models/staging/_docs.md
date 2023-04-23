@@ -27,7 +27,7 @@ Each row corresponds to an interval of work, which has a timestamp, details abou
 
 Item-level transaction history from 2018-01-18.
 
-The source of this model is a Google Sheet that I maintain manually (:puke:). Each row corresponds to an item, which has details about the item and about the transaction.
+The source of this model is a Google Sheet that I maintain manually (🤮). Each row corresponds to an item, which has details about the item and about the transaction.
 
 This source is already heavily denormalised (it's a single table!) so some of the details aren't quite perfect such as associating payments with transactions. This will hopefully be updated in the future which would mean updating this project to do the denormalisation here.
 
