@@ -11,7 +11,7 @@
         SELECT within(0,  1, 10);  -- 1
         SELECT within(11, 1, 10);  -- 10
     #}
-    CREATE MACRO within(expr, lower_bound, upper_bound) AS
+    CREATE OR REPLACE MACRO within(expr, lower_bound, upper_bound) AS
         GREATEST(LEAST(expr, upper_bound), lower_bound)
     ;
 {% endmacro %}

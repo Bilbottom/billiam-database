@@ -44,7 +44,7 @@ daily_work AS (
         SUM("interval") AS total_working_time,
         SUM("interval") FILTER (WHERE task IN ('Meetings', 'Catch Up')) AS meeting_time,
         ROUND(100.0 * meeting_time / total_working_time, 4) AS meeting_proportion,
-        ROUND(100.0 * meeting_time / MIN(total_working_time, 7.5 * 60), 4) AS working_day_meeting_proportion
+        ROUND(100.0 * meeting_time / LEAST(total_working_time, 7.5 * 60), 4) AS working_day_meeting_proportion
     FROM src_tracker
     GROUP BY date_time::DATE
 ),
