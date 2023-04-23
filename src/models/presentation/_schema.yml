@@ -10,7 +10,7 @@ models:
         description: >
           The calendar date corresponding to the metrics.
           
-          Dates are from 2019-02-01 onwards.
+          Dates are from 2018-01-01 onwards.
 
         # Finances metrics
       - name: total_cost
@@ -25,8 +25,11 @@ models:
           Non-essential items are items not in the following categories:
           
           - Bills
+          
           - Council Tax
+          
           - Rent
+          
           - Wage
       - name: non_essential_cost_proportion
         data_type: decimal(6, 4)
@@ -67,8 +70,9 @@ models:
           
           The values are:
           
-          - 0: Detail-level aggregates per task.
-          - 1: Task-level aggregates.
+          - `0`: Detail-level aggregates per task.
+          
+          - `1`: Task-level aggregates.
       - name: group_description
         data_type: text
         description: A description of the group ID.
