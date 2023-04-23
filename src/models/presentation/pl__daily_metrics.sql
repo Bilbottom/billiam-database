@@ -33,7 +33,7 @@ daily_transactions AS (
         transaction_date AS metric_date,
         SUM(cost) AS total_cost,
         SUM(cost) FILTER (WHERE category NOT IN ('Bills', 'Council Tax', 'Rent', 'Wage')) AS non_essential_cost,
-        GREATEST(LEAST(ROUND(100.0 * non_essential_cost / total_cost, 4), 100), 0) AS non_essential_cost_proportion
+        WITHIN(ROUND(100.0 * non_essential_cost / total_cost, 4), 0, 100) AS non_essential_cost_proportion
     FROM src_transactions
     WHERE NOT exclusion_flag
     GROUP BY transaction_date
