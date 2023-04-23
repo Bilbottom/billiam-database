@@ -12,8 +12,9 @@ models:
           
           The values are:
           
-          - 0: Detail-level aggregates per task.
-          - 1: Task-level aggregates.
+          - `0`: Detail-level aggregates per task.
+          
+          - `1`: Task-level aggregates.
       - name: group_description
         data_type: text
         description: A description of the group ID.

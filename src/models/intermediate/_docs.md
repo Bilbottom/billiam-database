@@ -12,6 +12,14 @@ The intermediate layer can get quite large, so it's important to keep it organis
 ## [int__task_details](int__task_details.sql)
 {% docs int__task_details %}
 
+Rolled-up aggregates for the tasks and their details.
+
+This table has rows at 2 grains:
+- Task level
+- Detail level (per task)
+
+The grains are identified by the `group_id` (and the corresponding `group_description`) columns.
+
 {% enddocs %}
 
 ---
