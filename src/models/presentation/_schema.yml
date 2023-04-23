@@ -52,7 +52,11 @@ models:
         data_type: number(6, 4)
         description: >
           The proportion of meeting time to the total time spent working on the
-          date.
+          date, adjusted for overworking.
+          
+          The adjustment is made by taking the lesser of the total time spent
+          working and 7.5 hours. This is to account for working additional hours
+          on a day to not deflate the metric.
   - name: pl__task_details
     description: '{{ doc("pl__task_details") }}'
     columns:
