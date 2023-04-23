@@ -3,8 +3,108 @@ version: 2
 
 models:
   - name: pl__daily_metrics
-    description: Daily metrics across both sources
-  - name: pl__transactions_cube
-    description: Transaction history rolled up into an OLAP cube.
+    description: '{{ doc("pl__daily_metrics") }}'
+    columns:
+      - name: metric_date
+        data_type: date
+        description: >
+          The calendar date corresponding to the metrics.
+          
+          Dates are from 2018-01-01 onwards.
+
+        # Finances metrics
+      - name: total_cost
+        data_type: decimal(18, 3)
+        description: >
+          The total net cost of all transactions on the date.
+      - name: non_essential_cost
+        data_type: decimal(18, 3)
+        description: >
+          The total net cost of all non-essential items on the date.
+          
+          Non-essential items are items not in the following categories:
+          
+          - Bills
+          
+          - Council Tax
+          
+          - Rent
+          
+          - Wage
+      - name: non_essential_cost_proportion
+        data_type: decimal(6, 4)
+        description: >
+          The proportion of non-essential cost to the total cost on the date.
+
+        # Daily tracker metrics
+      - name: total_working_time
+        data_type: integer
+        description: >
+          The total time, in minutes, spent working on the date (including lunch
+          breaks).
+      - name: meeting_time
+        data_type: integer
+        description: >
+          The total time, in minutes, spent in meetings on the date.
+      - name: meeting_proportion
+        data_type: number(6, 4)
+        description: >
+          The proportion of meeting time to the total time spent working on the
+          date.
+      - name: working_day_meeting_proportion
+        data_type: number(6, 4)
+        description: >
+          The proportion of meeting time to the total time spent working on the
+          date, adjusted for overworking.
+          
+          The adjustment is made by taking the lesser of the total time spent
+          working and 7.5 hours. This is to account for working additional hours
+          on a day to not deflate the metric.
   - name: pl__task_details
-    description: Details and metrics about the tasks.
+    description: '{{ doc("pl__task_details") }}'
+    columns:
+      - name: group_id
+        data_type: integer
+        description: >
+          A generated identifier to uniquely identify groups.
+          
+          The values are:
+          
+          - `0`: Detail-level aggregates per task.
+          
+          - `1`: Task-level aggregates.
+      - name: group_description
+        data_type: text
+        description: A description of the group ID.
+      - name: task
+        data_type: text
+        description: >
+          The task (project) that was being worked on at the timestamp.
+      - name: detail
+        data_type: text
+        description: >
+          Additional details about the task that was being worked on at the
+          timestamp.
+      - name: total_records
+        data_type: integer
+        description: >
+          The total number of events recorded for the task (or task and detail).
+      - name: total_time
+        data_type: integer
+        description: >
+          The total time, in minutes, spent on the task (or task and detail).
+      - name: start_time
+        data_type: integer
+        description:
+          The earliest timestamp than an event was recorded for the task (or
+          task and detail).
+      - name: end_time
+        data_type: integer
+        description:
+          The latest timestamp than an event was recorded for the task (or task
+          and detail).
+  - name: pl__transactions_cube
+    description: >
+      Transaction history rolled up into an OLAP cube.
+
+      Not helpful for me, but illustrates the usage of incremental models.
