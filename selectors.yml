@@ -1,0 +1,12 @@
+---
+# https://docs.getdbt.com/reference/node-selection/yaml-selectors
+
+selectors:
+  - name: default_run
+    default: true
+    description: >
+      Run the suite of models defined in this package alone, without any of the
+      models defined in other packages (such as `dbt_expectations`).
+    definition:
+      method: package
+      value: billiam_database

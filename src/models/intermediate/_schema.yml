@@ -2,15 +2,51 @@
 version: 2
 
 models:
+  - name: int__task_details
+    description: '{{ doc("int__task_details") }}'
+    columns:
+      - name: group_id
+        data_type: integer
+        description: >
+          A generated identifier to uniquely identify groups.
+          
+          The values are:
+          
+          - `0`: Detail-level aggregates per task.
+          
+          - `1`: Task-level aggregates.
+      - name: group_description
+        data_type: text
+        description: A description of the group ID.
+      - name: task
+        data_type: text
+        description: >
+          The task (project) that was being worked on at the timestamp.
+      - name: detail
+        data_type: text
+        description: >
+          Additional details about the task that was being worked on at the
+          timestamp.
+      - name: total_records
+        data_type: integer
+        description: >
+          The total number of events recorded for the task (or task and detail).
+      - name: total_time
+        data_type: integer
+        description: >
+          The total time, in minutes, spent on the task (or task and detail).
+      - name: start_time
+        data_type: integer
+        description:
+          The earliest timestamp than an event was recorded for the task (or
+          task and detail).
+      - name: end_time
+        data_type: integer
+        description:
+          The latest timestamp than an event was recorded for the task (or task
+          and detail).
   - name: int__transaction_items
-    description: >
-      The items corresponding to each of the transactions.
-      
-      Note that these are only items that have corresponding transactions in
-      `int__transactions`. Most tests can be omitted since they are tested in
-      the staging layer.
-      
-      This may be decommissioned in the future as it's not really doing much.
+    description: '{{ doc("int__transaction_items") }}'
     columns:
       - name: row_id
         data_type: integer
@@ -56,12 +92,7 @@ models:
         tests:
           - not_null
   - name: int__transactions
-    description: >
-      The transactions and their core measures.
-      
-      Note that these are only transactions that cause some net movement in my
-      overall balances -- for example, paying off a credit credit is being 
-      considered as not changing my net balance, and has been excluded.
+    description: '{{ doc("int__transactions") }}'
     columns:
       - name: transaction_id
         data_type: integer
@@ -103,4 +134,5 @@ models:
           with directly (so a third party will not be shown here).
         tests:
           - not_null
-#          - Doesn't include ||
+          - dbt_expectations.expect_column_values_to_not_match_like_pattern:
+              like_pattern: "%||%"

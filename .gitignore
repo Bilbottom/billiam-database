@@ -174,5 +174,5 @@ cython_debug/
 
 # dbt artefacts
 logs/
-src/packages/
+packages/
 .user.yml
