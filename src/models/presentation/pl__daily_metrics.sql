@@ -10,23 +10,11 @@
 
 
 {{ import(
-    include_with=true,
-    include_recursive=true,
-    include_final_comma=true,
     src_transactions=ref("int__transaction_items"),
-    src_tracker=ref("stg__daily_tracker")
-) }}
+    src_tracker=ref("stg__daily_tracker"),
 
-{#WITH RECURSIVE#}
-{##}
-{#src_transactions AS (#}
-{#    SELECT *#}
-{#    FROM {{ ref("int__transaction_items") }}#}
-{#),#}
-{#src_tracker AS (#}
-{#    SELECT *#}
-{#    FROM {{ ref("stg__daily_tracker") }}#}
-{#),#}
+    include_recursive=true
+) }}
 
 date_dim AS (
         SELECT '2018-01-01'::DATE AS metric_date
