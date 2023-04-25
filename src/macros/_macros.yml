@@ -38,10 +38,4 @@ macros:
           practise and should be avoided.
           
           It is expected that this parameter is filled with a `ref` or `source`
-          call:
-          
-          ```jinja
-          WITH example_cte AS (
-              {{ select_star(ref("my_model")) }}
-          )
-          ```
+          call.
