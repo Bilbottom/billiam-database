@@ -7,11 +7,11 @@
     - https://stackoverflow.com/a/67124464/8213085
     #}
     {%- if relation is string -%}
-        {{ return( dp_a4tb_demand_forecast_sales_forecast_poc_dv._select(relation) ) }}
+        {{ return( _select(relation) ) }}
     {%- else -%}
-        {{ return( dp_a4tb_demand_forecast_sales_forecast_poc_dv._select(
+        {{ return( _select(
             relation,
-            dp_a4tb_demand_forecast_sales_forecast_poc_dv._get_columns(relation)
+            _get_columns(relation)
         ) ) }}
     {%- endif -%}
 
@@ -48,12 +48,12 @@ FROM {{ object }}
     {%- set column_query -%}
         SELECT
             COALESCE(
-                NULLIF(LISTAGG(COLUMN_NAME, ',\n') WITHIN GROUP (ORDER BY ORDINAL_POSITION), ''),
+                NULLIF(STRING_AGG(COLUMN_NAME ORDER BY ORDINAL_POSITION, ',\n'), ''),
                 '*'  /* The model doesn't exist in the INFORMATION_SCHEMA yet */
             ) AS COLUMN_LIST
         FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE TABLE_SCHEMA = '{{ relation.schema }}' COLLATE 'en-ci'
-          AND TABLE_NAME = '{{ relation.identifier }}' COLLATE 'en-ci'
+        WHERE UPPER(TABLE_SCHEMA) = UPPER('{{ relation.schema }}')
+          AND UPPER(TABLE_NAME) = UPPER('{{ relation.identifier }}')
     {%- endset -%}
 
     {%- if execute -%}
