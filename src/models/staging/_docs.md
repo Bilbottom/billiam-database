@@ -1,28 +1,29 @@
-Staging Objects
----
+# Staging Objects
 
 The staging objects are the first "layer" of the warehouse (other than the raw layer which is where the raw data is dumped by external processes).
 
 The dbt documentation calls these the "atomic building blocks" of the warehouse:
+
 - https://docs.getdbt.com/guides/best-practices/how-we-structure/2-staging
 
 The staging models are the only ones that should use the `source` Jinja macro, and these models are typically views since the operations that they perform are simple (aligning column names, casting datatypes, etc).
 
+## [stg\_\_daily_tracker](stg__daily_tracker.sql)
 
-## [stg__daily_tracker](stg__daily_tracker.sql)
 {% docs stg__daily_tracker %}
 
 Work tracker history from 2019-04-23.
 
 The source of this model is my "automated" timesheet application, available at:
+
 - https://github.com/Bilbottom/daily-tracker
 
 Each row corresponds to an interval of work, which has a timestamp, details about the work, and the duration of the interval.
 
 {% enddocs %}
 
+## [stg\_\_finances](stg__finances.sql)
 
-## [stg__finances](stg__finances.sql)
 {% docs stg__finances %}
 
 Item-level transaction history from 2018-01-18.
