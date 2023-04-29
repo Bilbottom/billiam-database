@@ -42,20 +42,25 @@ models:
       - "SET log_query_path='logs/{{ this | replace('.', '__') }}.log';"
     +post-hook:
       - "SET log_query_path='';"
+    +group: billiam
 
     staging:
       +materialized: view
       +schema: staging
+      +access: private
       +docs:
         node_color: DarkOrange
     intermediate:
       +materialized: table
       +schema: intermediate
+      +access: private
     presentation:
       +materialized: table
       +schema: presentation
+      +access: public
       +docs:
         node_color: Green
+
   elementary:
     +schema: elementary
   dbt_project_evaluator:
