@@ -9,7 +9,7 @@ WITH
 
 src_tracker AS (
     SELECT *
-    FROM {{ ref("daily_tracker") }}
+    FROM {{ source("raw", "daily_tracker") }}
 ),
 
 final AS (

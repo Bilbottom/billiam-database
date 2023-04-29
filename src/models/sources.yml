@@ -12,15 +12,11 @@ sources: # Can't get these to work with DuckDB?
     database: billiam
     schema: calendar
     tables: []
-#  - name: finances
-#    description: Item-level transaction history from 2018-01-18.
-#    database: billiam
-#    schema: raw
-#    tables:
-#      - name: finances
-#  - name: daily-tracker
-#    description: Work tracker history from 2019-04-23.
-#    database: billiam
-#    schema: raw
-#    tables:
-#      - name: daily_tracker
+  - name: raw
+    database: billiam
+    schema: raw
+    tables:
+      - name: finances
+        description: Item-level transaction history from 2018-01-18.
+      - name: daily_tracker
+        description: Work tracker history from 2019-04-23.
