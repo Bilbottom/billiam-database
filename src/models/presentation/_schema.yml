@@ -9,7 +9,7 @@ models:
         data_type: date
         description: >
           The calendar date corresponding to the metrics.
-          
+
           Dates are from 2018-01-01 onwards.
 
         # Finances metrics
@@ -21,15 +21,15 @@ models:
         data_type: decimal(18, 3)
         description: >
           The total net cost of all non-essential items on the date.
-          
+
           Non-essential items are items not in the following categories:
-          
+
           - Bills
-          
+
           - Council Tax
-          
+
           - Rent
-          
+
           - Wage
       - name: non_essential_cost_proportion
         data_type: decimal(6, 4)
@@ -56,7 +56,7 @@ models:
         description: >
           The proportion of meeting time to the total time spent working on the
           date, adjusted for overworking.
-          
+
           The adjustment is made by taking the lesser of the total time spent
           working and 7.5 hours. This is to account for working additional hours
           on a day to not deflate the metric.
@@ -67,11 +67,11 @@ models:
         data_type: integer
         description: >
           A generated identifier to uniquely identify groups.
-          
+
           The values are:
-          
+
           - `0`: Detail-level aggregates per task.
-          
+
           - `1`: Task-level aggregates.
       - name: group_description
         data_type: text

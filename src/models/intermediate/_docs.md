@@ -1,20 +1,23 @@
-Intermediate Objects
----
+# Intermediate Objects
 
 The intermediate objects are the second "layer" of the warehouse and are where the transformations, aggregations, and core business logic are applied.
 
 The dbt documentation calls these the "purpose-built transformation steps":
+
 - https://docs.getdbt.com/guides/best-practices/how-we-structure/3-intermediate
 
 The intermediate layer can get quite large, so it's important to keep it organised. The dbt documentation recommends using sub-folders to organise the models, and using the `dbt_project.yml`[dbt_project.yml](../../../dbt_project.yml) configurations for folder-level settings.
 
 ---
-## [int__task_details](int__task_details.sql)
+
+## [int\_\_task_details](int__task_details.sql)
+
 {% docs int__task_details %}
 
 Rolled-up aggregates for the tasks and their details.
 
 This table has rows at 2 grains:
+
 - Task level
 - Detail level (per task)
 
@@ -23,7 +26,9 @@ The grains are identified by the `group_id` (and the corresponding `group_descri
 {% enddocs %}
 
 ---
-## [int__transaction_items](int__transaction_items.sql)
+
+## [int\_\_transaction_items](int__transaction_items.sql)
+
 {% docs int__transaction_items %}
 
 The items corresponding to each of the transactions.
@@ -36,7 +41,9 @@ This may be decommissioned in the future as it's not really doing much.
 {% enddocs %}
 
 ---
-## [int__transactions](int__transactions.sql)
+
+## [int\_\_transactions](int__transactions.sql)
+
 {% docs int__transactions %}
 
 The transactions and their core measures.

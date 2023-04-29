@@ -7,29 +7,27 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 profile: default
 
-model-paths: [ "src/models" ]
-seed-paths: [ "src/seeds" ]
-test-paths: [ "src/tests" ]
-analysis-paths: [ "src/analysis" ]
-macro-paths: [ "src/macros" ]
-snapshot-paths: [ "src/snapshots" ]
-asset-paths: [ "src/assets" ]
+model-paths: ["src/models"]
+seed-paths: ["src/seeds"]
+test-paths: ["src/tests"]
+analysis-paths: ["src/analysis"]
+macro-paths: ["src/macros"]
+snapshot-paths: ["src/snapshots"]
+asset-paths: ["src/assets"]
 
 target-path: target
 log-path: logs
 packages-install-path: packages
-clean-targets: [ "target", "logs", "packages" ]
+clean-targets: ["target", "logs", "packages"]
 
 dispatch:
   - macro_namespace: dbt
     search_order: ["dbt_project_evaluator", "dbt"]
 
-
 on-run-start:
-    - '{{ create_udfs() }}'
+  - "{{ create_udfs() }}"
 on-run-end:
   - "{% if target.name == 'prod' %}DROP SCHEMA IF EXISTS dbt_test__audit CASCADE;{% endif %}"
-
 
 models:
   billiam_database:
