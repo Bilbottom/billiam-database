@@ -27,7 +27,7 @@ dispatch:
 
 on-run-start:
     - '{{ create_udfs() }}'
-on-run-end:  # Find a better way to implement this conditional since we don't actually have a prod target
+on-run-end:
   - "{% if target.name == 'prod' %}DROP SCHEMA IF EXISTS dbt_test__audit CASCADE;{% endif %}"
 
 
@@ -37,7 +37,7 @@ models:
       +materialized: view
       +schema: staging
       +docs:
-        node_color: darkorange
+        node_color: DarkOrange
     intermediate:
       +materialized: table
       +schema: intermediate
@@ -45,14 +45,14 @@ models:
       +materialized: table
       +schema: presentation
       +docs:
-        node_color: green
+        node_color: Green
   elementary:
-    +schema: 'elementary'
+    +schema: elementary
   dbt_project_evaluator:
-    +schema: 'dbt_project_evaluator'
+    +schema: dbt_project_evaluator
 
 seeds:
   +docs:
-    node_color: gray
+    node_color: Gray
   billiam_database:
     +schema: raw
