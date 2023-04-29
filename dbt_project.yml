@@ -64,8 +64,8 @@ models:
 #  elementary:
 #    +schema: elementary
 
-#seeds:
-#  +docs:
-#    node_color: Gray
-#  billiam_database:
-#    +schema: raw
+seeds:
+  +docs:
+    node_color: Gray
+  billiam_database:
+    +schema: raw
