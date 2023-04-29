@@ -1,8 +1,8 @@
 ---
 version: 2
 
-# These should be sources and not seeds, but having issues getting the `source`
-# function to work with DuckDB
+# Treating these as seeds just so that the CSVs can be read in with the
+# `dbt seed` command
 
 seeds:
   - name: finances
