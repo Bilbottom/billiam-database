@@ -2,9 +2,9 @@
 name: deploy-dbt
 
 on:
-  pull_request:
-    branches: [main]
-    paths: [target/**]
+#  pull_request:
+#    branches: [main]
+#    paths: [target/**]
 
   workflow_dispatch:
 
