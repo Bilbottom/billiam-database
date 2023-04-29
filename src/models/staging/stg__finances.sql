@@ -9,7 +9,7 @@ WITH
 
 src_finances AS (
     SELECT rowid, *
-    FROM {{ ref("finances") }}
+    FROM {{ source("raw", "finances") }}
 ),
 
 final AS (
