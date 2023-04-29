@@ -9,7 +9,7 @@ config:
   write_json: true
   warn_error: false
   log_format: default
-  debug: false  # Enable with the --debug flag
+  debug: false # Enable with the `--debug` flag
   version_check: true
   fail_fast: false
   use_experimental_parser: true
