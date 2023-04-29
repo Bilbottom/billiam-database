@@ -15,8 +15,6 @@ macro-paths: ["src/macros"]
 snapshot-paths: ["src/snapshots"]
 asset-paths: ["src/assets"]
 
-target-path: target
-log-path: logs
 packages-install-path: packages
 clean-targets: ["target", "logs", "packages"]
 
