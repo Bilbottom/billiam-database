@@ -9,11 +9,11 @@ models:
         data_type: integer
         description: >
           A generated identifier to uniquely identify groups.
-          
+
           The values are:
-          
+
           - `0`: Detail-level aggregates per task.
-          
+
           - `1`: Task-level aggregates.
       - name: group_description
         data_type: text
@@ -52,15 +52,15 @@ models:
         data_type: integer
         description: >
           A generated identifier to uniquely identify rows.
-          
+
           Note that there is no concept of an 'item ID' in this model.
       - name: transaction_date
         data_type: date
         description: >
           The date of the transaction.
-          
+
           This will be when the transaction initiation happened in the local
-          timezone (which isn't recorded), not when the money was physically 
+          timezone (which isn't recorded), not when the money was physically
           moved (where there's a difference).
       - name: transaction_id
         data_type: integer
@@ -72,7 +72,7 @@ models:
         data_type: decimal(18, 3)
         description: >
           The value, in pounds sterling (£), of the item.
-          
+
           A positive value represents money sent to someone else, and a negative
           value represents money sent to me (or is a discount, etc).
       - name: category
@@ -82,7 +82,7 @@ models:
         data_type: text
         description: >
           The corresponding retailer for the transaction.
-          
+
           Note that this can also be a person (where the transaction is between
           me and someone else), and will always be the entity that I transacted
           with directly (so a third party will not be shown here).
@@ -104,18 +104,18 @@ models:
         data_type: integer
         description: >
           The date of the transaction.
-          
+
           This will be when the transaction initiation happened in the local
-          timezone (which isn't recorded), not when the money was physically 
+          timezone (which isn't recorded), not when the money was physically
           moved (where there's a difference).
       - name: cost
         data_type: decimal(18, 3)
         description: >
           The net value, in pounds sterling (£), of the transaction.
-          
+
           A positive value represents money sent to someone else, and a negative
           value represents money sent to me.
-          
+
           This should reconcile against the values quoted in bank statements.
         tests:
           - not_null
@@ -128,7 +128,7 @@ models:
         data_type: text
         description: >
           The corresponding retailer for the transaction.
-          
+
           Note that this can also be a person (where the transaction is between
           me and someone else), and will always be the entity that I transacted
           with directly (so a third party will not be shown here).
