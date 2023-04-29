@@ -2,9 +2,8 @@
 name: deploy-dbt
 
 on:
-#  pull_request:
-#    branches: [main]
-#    paths: [target/**]
+  push:
+    branches: [main]
 
   workflow_dispatch:
 
@@ -37,10 +36,12 @@ jobs:
           dbt clean --profiles-dir .
           dbt deps --profiles-dir .
 
+      - name: Run dbt unit tests 🧪
+        run: dbt test --select tag:unit-test --profiles-dir .
+
       - name: Compile dbt docs 📝
         run: dbt docs generate --profiles-dir .
 
-      # Moved this step up top just for pre-commit
       - name: Deploy dbt docs 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
