@@ -41,7 +41,7 @@ models:
     +pre-hook:
       - "SET log_query_path='logs/{{ this | replace('.', '__') }}.log';"
     +post-hook:
-      - "RESET log_query_path;"
+      - "SET log_query_path='';"
 
     staging:
       +materialized: view
