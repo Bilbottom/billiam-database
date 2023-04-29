@@ -26,13 +26,24 @@ dispatch:
 
 
 on-run-start:
-    - '{{ create_udfs() }}'
+  - '{{ create_udfs() }}'
 on-run-end:
   - "{% if target.name == 'prod' %}DROP SCHEMA IF EXISTS dbt_test__audit CASCADE;{% endif %}"
 
 
+quoting:
+  database: false
+  schema: false
+  identifier: false
+
+
 models:
   billiam_database:
+    +pre-hook:
+      - "SET log_query_path='logs/{{ this | replace('.', '__') }}.log';"
+    +post-hook:
+      - "RESET log_query_path;"
+
     staging:
       +materialized: view
       +schema: staging
