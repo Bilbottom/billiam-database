@@ -3,8 +3,8 @@ name: deploy-dbt
 
 on:
   pull_request:
-    branches: [ main ]
-    paths: [ target/** ]
+    branches: [main]
+    paths: [target/**]
 
   workflow_dispatch:
 
@@ -19,6 +19,11 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
+      # Moved this step up top just for pre-commit
+      - name: Deploy dbt docs 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: target
 #      - name: Python Setup 🐍
 #        uses: actions/setup-python@v4
 #        with:
@@ -39,8 +44,3 @@ jobs:
 #
 #      - name: Compile dbt docs 📝
 #        run: dbt docs generate --profiles-dir .
-
-      - name: Deploy dbt docs 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: target

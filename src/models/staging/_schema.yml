@@ -12,7 +12,7 @@ models:
         data_type: timestamp
         description: >
           The local timestamp that the entry was recorded for.
-          
+
           The local timestamp isn't recorded, but it can be assumed to be GMT
           (and BST over the Summertime).
         tests:
@@ -35,21 +35,21 @@ models:
         data_type: integer
         description: >
           The time, in minutes, between entries.
-          
+
           Note that this will never be a true measure of how much time is spent
           on a task since additional things can happen _between_ entries, and
           the interval over which this should be correspond to is ambiguous.
-          
+
           That is, an interval of 15 minutes on an entry recorded at 10:00 could
           mean any of the following:
-          
+
           - The entry corresponds to the last 15 minutes, 09:45 to 10:00.
-          
+
           - The entry corresponds to the following 15 minutes, 10:00 to 10:15.
-          
+
           - The entry corresponds to the surrounding 15 minutes, 09:52:30 to
             10:07:30.
-          
+
           - The entry has over-stated how much time was spent on the task
             because time was spent on other tasks before 10:00 and after 10:00.
         tests:
@@ -58,13 +58,13 @@ models:
         data_type: text
         description: >
           The employer at the time of recording.
-          
+
           In a future iteration of this project, this will instead be captured
           in a seed with the from- and to- employment dates.
         tests:
           - not_null
           - accepted_values:
-              values: [ "TSB", "Jaja", "Allica", "Sainsbury''s" ]
+              values: ["TSB", "Jaja", "Allica", "Sainsbury''s"]
   - name: stg__finances
     description: '{{ doc("stg__finances") }}'
     columns:
@@ -83,9 +83,9 @@ models:
         data_type: date
         description: >
           The date of the transaction.
-          
+
           This will be when the transaction initiation happened in the local
-          timezone (which isn't recorded), not when the money was physically 
+          timezone (which isn't recorded), not when the money was physically
           moved (where there's a difference).
         tests:
           - not_null
@@ -98,7 +98,7 @@ models:
         data_type: decimal(18, 3)
         description: >
           The value, in pounds sterling (£), of the item.
-          
+
           A positive value represents money sent to someone else, and a negative
           value represents money sent to me (or is a discount, etc).
         tests:
@@ -112,7 +112,7 @@ models:
         data_type: text
         description: >
           The corresponding retailer for the transaction.
-          
+
           Note that this can also be a person (where the transaction is between
           me and someone else), and will always be the entity that I transacted
           with directly (so a third party will not be shown here).

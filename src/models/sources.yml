@@ -1,13 +1,13 @@
 ---
 version: 2
 
-sources:  # Can't get these to work with DuckDB?
+sources: # Can't get these to work with DuckDB?
   - name: calendar
     description: >
       A set of calendar tables for date manipulation.
-      
+
       This should plug into:
-      
+
       - https://github.com/Bilbottom/sql-schema-models/tree/main/date-schema
     database: billiam
     schema: calendar

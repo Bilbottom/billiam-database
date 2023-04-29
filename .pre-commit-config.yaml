@@ -1,6 +1,10 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 
+hookable-files: &hookable-files
+  files: (src/.+)|(\.github/.+)|(.+\.yml)
+  exclude: (target|logs|packages)/.*
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
@@ -8,13 +12,16 @@ repos:
       - id: no-commit-to-branch
         name: Don't allow commits to main branch
         args: ["--branch", "main"]
+        <<: *hookable-files
       - id: trailing-whitespace
         name: Remove trailing whitespace
+        <<: *hookable-files
       - id: end-of-file-fixer
         name: Check files end wth a newline character
-        files: (src/.+)|(\.github/.+)|(.+\.yml)
+        <<: *hookable-files
       - id: check-added-large-files
         name: Check for large files
+        <<: *hookable-files
 
   # Formatting
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -22,7 +29,8 @@ repos:
     hooks:
       - id: prettier
         name: Make code pretty
-        exclude: .*\.md$
+        <<: *hookable-files
+
 #  # SQL Linting
 #  - repo: https://github.com/sqlfluff/sqlfluff
 #    rev: 2.0.7
