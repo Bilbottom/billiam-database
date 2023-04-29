@@ -15,8 +15,6 @@ macro-paths: ["src/macros"]
 snapshot-paths: ["src/snapshots"]
 asset-paths: ["src/assets"]
 
-target-path: target
-log-path: logs
 packages-install-path: packages
 clean-targets: ["target", "logs", "packages"]
 
@@ -42,6 +40,7 @@ models:
       - "SET log_query_path='logs/{{ this | replace('.', '__') }}.log';"
     +post-hook:
       - "SET log_query_path='';"
+    +group: billiam
 
     staging:
       +materialized: view
@@ -56,6 +55,7 @@ models:
       +schema: presentation
       +docs:
         node_color: Green
+
   elementary:
     +schema: elementary
   dbt_project_evaluator:
