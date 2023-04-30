@@ -1,7 +1,7 @@
 ---
 version: 2
 
-sources: # Can't get these to work with DuckDB?
+sources:
   - name: calendar
     description: >
       A set of calendar tables for date manipulation.
