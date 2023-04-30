@@ -56,16 +56,31 @@ models:
       +materialized: table
       +schema: presentation
       +access: public
+#      +contract:
+#        enforced: true
       +docs:
         node_color: Green
 
   dbt_project_evaluator:
+    +enabled: false
     +schema: dbt_project_evaluator
-#  elementary:
-#    +schema: elementary
+    +docs:
+      show: false
+  elementary:
+    +enabled: false
+    +schema: elementary
+    +docs:
+      show: false
 
 seeds:
+  +enabled: false
   +docs:
     node_color: Gray
   billiam_database:
     +schema: raw
+
+# https://docs.getdbt.com/reference/test-configs
+tests:
+  +docs:
+    node_color: Indigo
+    show: false
