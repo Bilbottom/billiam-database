@@ -32,3 +32,4 @@ repos:
 #      - id: sqlfluff
 #        name: Lint SQL files
 #        files: "src/models/.+.sql$"
+#        exclude: ""
