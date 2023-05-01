@@ -1,0 +1,29 @@
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+---
+name: set-up-dbt
+
+on:
+  workflow_call:
+
+jobs:
+  set-up-dbt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Python setup 🐍
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install dbt ⬇️
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Create mock database 🤡
+        run: python -c "import duckdb; con = duckdb.connect('$GITHUB_WORKSPACE/src/billiam.duckdb'); con.close()"
+
+      - name: Install dbt dependencies ➕
+        run: |
+          dbt clean --profiles-dir .
+          dbt deps --profiles-dir .
