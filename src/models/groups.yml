@@ -1,4 +1,5 @@
 ---
+# https://docs.getdbt.com/docs/build/groups
 groups:
   - name: billiam
     owner:

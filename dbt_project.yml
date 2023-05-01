@@ -54,8 +54,8 @@ models:
       +materialized: table
       +schema: presentation
       +access: public
-      #      +contract:
-      #        enforced: true
+      # +contract:
+      #   enforced: true
       +docs:
         node_color: Green
 
