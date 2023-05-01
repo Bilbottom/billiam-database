@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Python and dbt ✨
-        uses: .github/workflows/set-up-dbt.yaml
+        uses: ./.github/workflows/set-up-dbt.yaml
 
       - name: Compile dbt docs 📝
         run: dbt docs generate --profiles-dir .
