@@ -10,15 +10,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  env-setup:
+    name: Set up Python and dbt ✨
+    uses: ./.github/workflows/set-up-dbt.yaml
+
   run-tests:
     runs-on: ubuntu-latest
+    needs: [env-setup]
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
-
-      - name: Set up Python and dbt ✨
-        uses: ./.github/workflows/set-up-dbt.yaml
-
       - name: Run pre-commit 🌿
         uses: pre-commit/action@v3.0.0
 

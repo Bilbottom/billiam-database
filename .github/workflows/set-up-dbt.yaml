@@ -9,6 +9,9 @@ jobs:
   set-up-dbt:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
       - name: Python setup 🐍
         uses: actions/setup-python@v4
         with:
