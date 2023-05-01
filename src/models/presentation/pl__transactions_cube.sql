@@ -8,20 +8,19 @@
             "category",
             "counterparty",
             "exclusion_flag"
-        ]
+        ],
+        tags=["finances"]
     )
 }}
+
 
 /*
     Not helpful for me, but illustrates the usage
 */
 
-WITH
-
-int_transaction_items AS (
-    SELECT *
-    FROM {{ ref("int__transaction_items") }}
-),
+{{ import(
+    int_transaction_items = ref("int__transaction_items")
+) }}
 
 final AS (
     SELECT

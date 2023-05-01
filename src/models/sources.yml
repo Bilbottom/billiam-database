@@ -18,5 +18,7 @@ sources:
     tables:
       - name: finances
         description: Item-level transaction history from 2018-01-18.
+        tags: [finances]
       - name: daily_tracker
         description: Work tracker history from 2019-04-23.
+        tags: [daily-tracker]

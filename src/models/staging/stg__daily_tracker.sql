@@ -1,16 +1,13 @@
 {{
     config(
-        alias="daily_tracker"
+        alias="daily_tracker",
+        tags=["daily-tracker"]
     )
 }}
 
-
-WITH
-
-src_tracker AS (
-    SELECT *
-    FROM {{ source("raw", "daily_tracker") }}
-),
+{{ import(
+    src_tracker = source("raw", "daily_tracker")
+) }}
 
 final AS (
     SELECT
