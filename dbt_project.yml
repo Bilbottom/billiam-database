@@ -27,12 +27,10 @@ on-run-start:
 on-run-end:
   - "{% if target.name == 'prod' %}DROP SCHEMA IF EXISTS dbt_test__audit CASCADE;{% endif %}"
 
-
 quoting:
   database: false
   schema: false
   identifier: false
-
 
 models:
   billiam_database:
@@ -56,8 +54,8 @@ models:
       +materialized: table
       +schema: presentation
       +access: public
-#      +contract:
-#        enforced: true
+      # +contract:
+      #   enforced: true
       +docs:
         node_color: Green
 
