@@ -1,17 +1,15 @@
 {{
     config(
         alias="task_details",
-        materialized="view"
+        materialized="view",
+        tags=["daily-tracker"]
     )
 }}
 
 
-WITH
-
-src_task_details AS (
-    SELECT *
-    FROM {{ ref("int__task_details") }}
-),
+{{ import(
+    src_task_details = ref("int__task_details")
+) }}
 
 final AS (
     SELECT

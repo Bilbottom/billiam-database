@@ -1,6 +1,7 @@
 {{
     config(
-        alias="daily_metrics"
+        alias="daily_metrics",
+        tags=["daily-tracker", "finances"]
     )
 }}
 
