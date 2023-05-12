@@ -1,16 +1,14 @@
 {{
     config(
-        alias="transactions"
+        alias="transactions",
+        tags=["finances"]
     )
 }}
 
 
-WITH
-
-stg_finances AS (
-    SELECT *
-    FROM {{ ref("stg__finances") }}
-),
+{{ import(
+    stg_finances = ref("stg__finances")
+) }}
 
 final AS (
     SELECT

@@ -1,16 +1,16 @@
 {{
     config(
-        alias="finances"
+        alias="finances",
+        tags=["finances"]
     )
 }}
 
 
 WITH
-
-src_finances AS (
-    SELECT rowid, *
-    FROM {{ ref("finances") }}
-),
+    src_finances AS (
+        SELECT rowid, *
+        FROM {{ source("raw", "finances") }}
+    ),
 
 final AS (
     SELECT

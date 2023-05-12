@@ -1,8 +1,28 @@
 ---
+# https://docs.getdbt.com/reference/profiles.yml
+
+config:
+  send_anonymous_usage_stats: true
+  use_colors: true
+  partial_parse: true
+  printer_width: 80
+  write_json: true
+  warn_error: false
+  log_format: default
+  debug: false # Enable with the `--debug` flag
+  version_check: true
+  fail_fast: false
+  use_experimental_parser: true
+
 default:
   outputs:
-    dev:
+    dev: &connection
       type: duckdb
-      path: /Users/bill.wallis/Repos/Billiam/billiam-database/src/billiam.duckdb
+      path: "{{ env_var('GITHUB_WORKSPACE', '') }}/src/billiam.duckdb"
+
+    # Re-use the same connection details so that we can use the same connection
+    # for both dev and prod, but different targets allows us to do conditional
+    # actions in things like the pre- and post-hooks.
+    prod: *connection
 
   target: dev

@@ -7,12 +7,12 @@
     - https://stackoverflow.com/a/67124464/8213085
     -#}
     {%- if relation is string -%}
-        {{- return( _select(relation) ) -}}
+        {{ return( _select(relation) ) }}
     {%- else -%}
-        {{- return( _select(
+        {{ return( _select(
             relation,
             _get_columns(relation)
-        ) ) -}}
+        ) ) }}
     {%- endif -%}
 
 {% endmacro %}
@@ -57,8 +57,8 @@ FROM {{ object }}
     {%- endset -%}
 
     {%- if execute -%}
-        {{- return( run_query(column_query).columns[0].values()[0] ) -}}
+        {{ return( run_query(column_query).columns[0].values()[0] ) }}
     {%- else -%}
-        {{- return( "*" ) -}}
+        {{ return( "*" ) }}
     {%- endif -%}
 {% endmacro %}

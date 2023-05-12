@@ -172,7 +172,8 @@ cython_debug/
 #.idea/
 
 
-# dbt artefacts
+# dbt artifacts
 logs/
 packages/
+target/
 .user.yml

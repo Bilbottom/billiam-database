@@ -1,10 +1,10 @@
 dbt clean
-proxy_off
+#proxy_off
 dbt deps
-proxy_on
+#proxy_on
 dbt source freshness
 #dbt seed
-#dbt run --full-refresh
+#dbt run --full-refresh --target dev
 #dbt test --store-failures
 dbt build --full-refresh
 

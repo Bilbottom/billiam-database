@@ -1,6 +1,7 @@
 {{
     config(
-        alias="daily_metrics"
+        alias="daily_metrics",
+        tags=["daily-tracker", "finances"]
     )
 }}
 
@@ -10,10 +11,9 @@
 
 
 {{ import(
-    src_transactions=ref("int__transaction_items"),
-    src_tracker=ref("stg__daily_tracker"),
-
-    include_recursive=true
+    include_recursive=true,
+    src_transactions = ref("int__transaction_items"),
+    src_tracker = ref("stg__daily_tracker")
 ) }}
 
 date_dim AS (
@@ -49,13 +49,13 @@ final AS (
     SELECT
         date_dim.metric_date,
 
-        COALESCE(daily_transactions.total_cost, 0) AS total_cost,
-        COALESCE(daily_transactions.non_essential_cost, 0) AS non_essential_cost,
-        COALESCE(daily_transactions.non_essential_cost_proportion, 0) AS non_essential_cost_proportion,
-        COALESCE(daily_work.total_working_time, 0) AS total_working_time,
-        COALESCE(daily_work.meeting_time, 0) AS meeting_time,
-        COALESCE(daily_work.meeting_proportion, 0) AS meeting_proportion,
-        COALESCE(daily_work.working_day_meeting_proportion, 0) AS working_day_meeting_proportion
+        COALESCE(daily_transactions.total_cost, 0)::DECIMAL(18, 3) AS total_cost,
+        COALESCE(daily_transactions.non_essential_cost, 0)::DECIMAL(18, 3) AS non_essential_cost,
+        COALESCE(daily_transactions.non_essential_cost_proportion, 0):: DECIMAL(8, 4) AS non_essential_cost_proportion,
+        COALESCE(daily_work.total_working_time, 0)::INT AS total_working_time,
+        COALESCE(daily_work.meeting_time, 0)::INT AS meeting_time,
+        COALESCE(daily_work.meeting_proportion, 0):: DECIMAL(8, 4) AS meeting_proportion,
+        COALESCE(daily_work.working_day_meeting_proportion, 0):: DECIMAL(8, 4) AS working_day_meeting_proportion
     FROM date_dim
         LEFT JOIN daily_transactions USING(metric_date)
         LEFT JOIN daily_work USING(metric_date)
