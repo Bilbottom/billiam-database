@@ -7,6 +7,7 @@ macros:
       Create the UDFs required throughout the project (and beyond!).
     docs:
       show: true
+
   - name: import
     description: >
       Expand the key-value pairs into the import CTEs.
@@ -17,25 +18,8 @@ macros:
       using `SELECT *`.
     docs:
       show: true
-  - name: select_star
-    description: >
-      Construct a `SELECT` statement for the given relation.
 
-      If the relation is a string (which should **never** be the case since it's
-      bad practise) or if the relation can't be found in the information schema,
-      then the select statement will just be `SELECT * FROM <relation>`.
-
-      Otherwise, the columns of the relation will be specified in the `SELECT`.
+  - name: _parse_relation
+    description: Helper macro for `import`.
     docs:
-      show: true
-    arguments:
-      - name: relation
-        type: str | Relation
-        description: >
-          The relation to select from.
-
-          The explicit database reference _can_ be passed, but this is bad
-          practise and should be avoided.
-
-          It is expected that this parameter is filled with a `ref` or `source`
-          call.
+      show: false
