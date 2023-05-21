@@ -1,0 +1,21 @@
+---
+modules:
+  # Standard library modules
+  - package: math
+    exports: [e, inf, nan, pi, tau]
+  - package: textwrap
+    exports:
+      - dedent
+      - indent
+
+  # Third-Party Packages
+  - package: requests
+    exports:
+      - codes
+
+  # Internal packages
+  - package: custom_package
+    location: "C:/Users/bill/Repos/bilbottom/billiam-database/"
+    exports:
+      - some_string
+      - iff

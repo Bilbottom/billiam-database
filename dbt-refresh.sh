@@ -8,3 +8,7 @@ dbt build --full-refresh
 
 dbt docs generate
 dbt docs serve
+
+
+# dbt run --select tag:module-test
+# dbt test --select tag:module-test
