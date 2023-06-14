@@ -1,0 +1,17 @@
+# https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
+
+[project]
+name = "billiam-database"
+version = "0.0.0"
+description = "OLAP database project for life admin (feat. dbt)."
+keywords = ["sql", "dbt", "duckdb"]
+requires-python = ">=3.9"
+dynamic = ["dependencies", "optional-dependencies"]
+
+[project.urls]
+repository = "https://github.com/Bilbottom/billiam-database"
+documentation = "https://bilbottom.github.io/billiam-database/#!/overview"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+optional-dependencies = {file = ["requirements-dev.txt"]}
