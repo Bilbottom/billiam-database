@@ -5,16 +5,19 @@ files: (src/.+)|(\.github/.+)|(.+\.yml)
 exclude: (target/.*|logs/.*|packages/.*|.*\.sql) # SQL files will be hooked explicitly in SQLFluff
 
 repos:
+  - repo: meta
+    hooks:
+      - id: identity
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
       - id: no-commit-to-branch
-        name: Don't allow commits to main branch
+        name: Don't allow commits to the main branch
         args: ["--branch", "main"]
       - id: trailing-whitespace
         name: Remove trailing whitespace
       - id: end-of-file-fixer
-        name: Check files end wth a newline character
+        name: Check that files end with a newline character
       - id: check-added-large-files
         name: Check for large files
 
