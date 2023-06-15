@@ -5,6 +5,9 @@ files: (src/.+)|(\.github/.+)|(.+\.yml)
 exclude: (target/.*|logs/.*|packages/.*|.*\.sql) # SQL files will be hooked explicitly in SQLFluff
 
 repos:
+  - repo: meta
+    hooks:
+      - id: identity
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
