@@ -15,10 +15,15 @@ sources:
   - name: raw
     database: billiam
     schema: raw
+    freshness:
+      warn_after: { count: 1, period: day }
+      error_after: { count: 2, period: day }
     tables:
       - name: finances
         description: Item-level transaction history from 2018-01-18.
         tags: [finances]
+        loaded_at_field: STRPTIME("Date", '%d/%m/%Y')::TIMESTAMP
       - name: daily_tracker
         description: Work tracker history from 2019-04-23.
         tags: [daily-tracker]
+        loaded_at_field: date_time::TIMESTAMP
