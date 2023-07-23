@@ -13,8 +13,8 @@ sources:
     schema: calendar
     tables: []
   - name: raw
-    database: billiam
-    schema: raw
+    meta:
+      external_location: "src/models/source/{name}.csv"
     freshness:
       warn_after: { count: 1, period: day }
       error_after: { count: 2, period: day }
@@ -22,7 +22,7 @@ sources:
       - name: finances
         description: Item-level transaction history from 2018-01-18.
         tags: [finances]
-        loaded_at_field: STRPTIME("Date", '%d/%m/%Y')::TIMESTAMP
+        loaded_at_field: ("Date")::TIMESTAMP
       - name: daily_tracker
         description: Work tracker history from 2019-04-23.
         tags: [daily-tracker]
