@@ -34,6 +34,7 @@ jobs:
         run: |
           dbt clean --profiles-dir .
           dbt deps --profiles-dir .
+          dbt run-operation create_udfs --profiles-dir .
 
       - name: Compile dbt docs 📝
         run: dbt docs generate --profiles-dir .

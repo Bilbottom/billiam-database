@@ -64,18 +64,11 @@ models:
     +schema: dbt_project_evaluator
     +docs:
       show: false
-  elementary:
-    +enabled: false
-    +schema: elementary
-    +docs:
-      show: false
-
-seeds:
-  +enabled: false
-  +docs:
-    node_color: Gray
-  billiam_database:
-    +schema: raw
+#  elementary:
+#    +enabled: false
+#    +schema: elementary
+#    +docs:
+#      show: false
 
 # https://docs.getdbt.com/reference/test-configs
 tests:
