@@ -1,4 +1,4 @@
 pre-commit==2.21.0
 
 # GitHub
-db-query-profiler @ git+https://github.com/Bilbottom/db-query-profiler@v0.0.1
+db-query-profiler @ git+https://github.com/Bilbottom/db-query-profiler@v0.0.2
