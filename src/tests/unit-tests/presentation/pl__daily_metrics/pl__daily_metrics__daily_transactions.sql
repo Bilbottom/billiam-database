@@ -3,7 +3,7 @@
 
 {% call dbt_unit_testing.test(
     "pl__daily_metrics",
-    "The date axis should be generated",
+    "The date axis should be generated.",
     {"cte_name": "daily_transactions"}
 ) %}
   {% call dbt_unit_testing.mock_ref("int__transaction_items", {"input_format": "csv"}) %}
