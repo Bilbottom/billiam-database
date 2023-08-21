@@ -28,16 +28,18 @@ jobs:
         run: poetry install --no-root
 
       - name: Create mock database 🤡
-        run: python -c "import duckdb; con = duckdb.connect('$GITHUB_WORKSPACE/billiam_database/billiam.duckdb'); con.close()"
+        run: >
+          poetry run python -c
+          "import duckdb; con = duckdb.connect('$GITHUB_WORKSPACE/billiam_database/billiam.duckdb'); con.close()"
 
       - name: Install dbt dependencies ➕
         run: |
-          dbt clean --profiles-dir .
-          dbt deps --profiles-dir .
-          dbt run-operation set_ci_environment --profiles-dir .
+          poetry run dbt clean --profiles-dir .
+          poetry run dbt deps --profiles-dir .
+          poetry run dbt run-operation set_ci_environment --profiles-dir .
 
       - name: Parse dbt 🗃️
-        run: dbt parse --profiles-dir .
+        run: poetry run dbt parse --profiles-dir .
 
       - name: Run dbt unit tests 🧪
-        run: dbt test --select tag:unit-test --profiles-dir .
+        run: poetry run dbt test --select tag:unit-test --profiles-dir .
