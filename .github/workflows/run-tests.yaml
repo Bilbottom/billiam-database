@@ -16,15 +16,16 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
+      - name: 📦 Set up Poetry
+        run: pipx install poetry==1.5.1
+
       - name: Python setup 🐍
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
       - name: Install dbt ⬇️
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        run: poetry install
 
       - name: Create mock database 🤡
         run: python -c "import duckdb; con = duckdb.connect('$GITHUB_WORKSPACE/src/billiam.duckdb'); con.close()"

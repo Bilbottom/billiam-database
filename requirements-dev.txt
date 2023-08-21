@@ -1,5 +1,0 @@
-pre-commit==2.21.0
-
-# GitHub
-db-query-profiler @ git+https://github.com/Bilbottom/db-query-profiler@v0.0.2
-dbt-unit-test-coverage @ git+https://github.com/Bilbottom/dbt-unit-test-coverage@v0.0.1
