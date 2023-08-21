@@ -8,6 +8,22 @@ keywords = ["sql", "dbt", "duckdb"]
 repository = "https://github.com/Bilbottom/billiam-database"
 documentation = "https://bilbottom.github.io/billiam-database/#!/overview"
 
+# This isn't a library so there aren't any "packages" to include, but
+# `poetry install` complains that:
+#   > billiam_database is not a package.
+#
+# Poetry only supports an "application build" via its CLI by using the
+# `--no-root` flag which doesn't currently exist in the `pyproject.toml`
+# file configuration yet, see:
+#   - https://github.com/python-poetry/poetry/issues/2458
+#   - https://github.com/python-poetry/poetry/issues/1132
+#
+# Until this is supported, we'll have to just remember to include the
+# `--no-root` flag when running `poetry install`:
+#   $ poetry install --no-root --sync --with dev
+packages = []
+
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
