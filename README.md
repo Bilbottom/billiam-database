@@ -2,6 +2,8 @@
 
 [![Tests](https://github.com/Bilbottom/billiam-database/actions/workflows/run-tests.yaml/badge.svg)](https://github.com/Bilbottom/billiam-database/actions/workflows/run-tests.yaml)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Bilbottom/billiam-database/main.svg)](https://results.pre-commit.ci/latest/github/Bilbottom/billiam-database/main)
+[![dbt-coverage](coverage-dbt.svg)](https://github.com/google/pybadges)
+
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Bilbottom/billiam-database)
 
@@ -9,7 +11,7 @@
 
 ---
 
-# Billiam's Database :mage:
+# Billiam's Database 🧙‍♂️
 
 As part of my life admin, I keep track of:
 

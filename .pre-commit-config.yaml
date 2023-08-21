@@ -16,6 +16,7 @@ repos:
         name: Remove trailing whitespace
       - id: end-of-file-fixer
         name: Check that files end with a newline character
+        exclude: "coverage.dbt"
       - id: check-added-large-files
         name: Check for large files
       - id: check-json
