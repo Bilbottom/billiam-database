@@ -1,6 +1,6 @@
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
 ---
-name: run-tests
+name: Tests
 run-name: Run project tests
 
 on: [pull_request, workflow_dispatch]
