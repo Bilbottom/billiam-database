@@ -29,7 +29,7 @@ jobs:
         run: poetry install
 
       - name: Create mock database 🤡
-        run: python -c "import duckdb; con = duckdb.connect('$GITHUB_WORKSPACE/src/billiam.duckdb'); con.close()"
+        run: python -c "import duckdb; con = duckdb.connect('$GITHUB_WORKSPACE/billiam_database/billiam.duckdb'); con.close()"
 
       - name: Install dbt dependencies ➕
         run: |

@@ -7,13 +7,13 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 profile: default
 
-model-paths: ["src/models"]
-seed-paths: ["src/seeds"]
-test-paths: ["src/tests"]
-analysis-paths: ["src/analysis"]
-macro-paths: ["src/macros"]
-snapshot-paths: ["src/snapshots"]
-asset-paths: ["src/assets"]
+model-paths: ["billiam_database/models"]
+seed-paths: ["billiam_database/seeds"]
+test-paths: ["billiam_database/tests"]
+analysis-paths: ["billiam_database/analysis"]
+macro-paths: ["billiam_database/macros"]
+snapshot-paths: ["billiam_database/snapshots"]
+asset-paths: ["billiam_database/assets"]
 
 packages-install-path: packages
 clean-targets: ["target", "logs", "packages"]

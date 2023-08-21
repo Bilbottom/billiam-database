@@ -24,7 +24,7 @@ This repo is both a [dbt](https://www.getdbt.com/) POC plus a means for me to an
 
 Current lineage diagram:
 
-![lineage-diagrams](src/assets/dbt-dag.png)
+![lineage-diagrams](billiam_database/assets/dbt-dag.png)
 
 Documentation is hosted at:
 
