@@ -9,7 +9,7 @@ config:
   write_json: true
   warn_error: false
   log_format: default
-  debug: false # Enable with the `--debug` flag
+  debug: false # Enable with the `--debug` flag, too
   version_check: true
   fail_fast: false
   use_experimental_parser: true
@@ -18,10 +18,10 @@ default:
   outputs:
     dev: &connection
       type: duckdb
-      path: "{{ env_var('GITHUB_WORKSPACE', '') }}/src/billiam.duckdb"
+      path: "{{ env_var('GITHUB_WORKSPACE', '') }}/billiam_database/billiam.duckdb"
 
     # Re-use the same connection details so that we can use the same connection
-    # for both dev and prod, but different targets allows us to do conditional
+    # for both dev and prod, but different targets allow us to do conditional
     # actions in things like the pre- and post-hooks.
     prod: *connection
 

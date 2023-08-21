@@ -14,7 +14,7 @@ sources:
     tables: []
   - name: raw
     meta:
-      external_location: "src/models/source/{name}.csv"
+      external_location: "billiam_database/models/source/{name}.csv"
     freshness:
       warn_after: { count: 1, period: day }
       error_after: { count: 2, period: day }

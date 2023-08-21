@@ -12,7 +12,7 @@ def main() -> None:
     Time the queries in the queries directory.
     """
     db_connection = duckdb.connect(
-        database=str(Path(__file__).parent.parent / "src" / "billiam.duckdb"),
+        database=str(Path(__file__).parent.parent / "billiam_database" / "billiam.duckdb"),
         read_only=True,
     )
     db_query_profiler.time_queries(
