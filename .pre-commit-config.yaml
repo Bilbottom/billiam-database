@@ -25,13 +25,13 @@ repos:
         name: Check YAML files are valid and parseable
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.0-alpha.0
+    rev: v3.0.2
     hooks:
       - id: prettier
         name: Make code pretty
 
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 2.0.7
+    rev: 2.3.0
     hooks:
       - id: sqlfluff-lint
         name: Lint SQL files
