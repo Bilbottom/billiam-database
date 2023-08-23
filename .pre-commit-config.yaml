@@ -1,6 +1,6 @@
 ---
 ci:
-  skip: [dbt-compile, dbt-unit-test, dbt-unit-test-coverage]
+  skip: [poetry-lock, dbt-compile, dbt-unit-test, dbt-unit-test-coverage]
 
 default_install_hook_types: [pre-commit, post-commit]
 
@@ -32,6 +32,14 @@ repos:
         name: Check TOML files are valid and parseable
       - id: check-ast
         name: Validate Python
+
+  - repo: https://github.com/python-poetry/poetry
+    rev: 1.6.0
+    hooks:
+      - id: poetry-check
+        name: Check that the Poetry configuration is valid
+      - id: poetry-lock
+        name: Check that the lock file is up-to-date
 
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v3.0.2
