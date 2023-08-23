@@ -1,11 +1,13 @@
 <div align="center">
 
-[![Tests](https://github.com/Bilbottom/billiam-database/actions/workflows/run-tests.yaml/badge.svg)](https://github.com/Bilbottom/billiam-database/actions/workflows/run-tests.yaml)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Bilbottom/billiam-database/main.svg)](https://results.pre-commit.ci/latest/github/Bilbottom/billiam-database/main)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
+[![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
+[![run-tests](https://github.com/Bilbottom/billiam-database/actions/workflows/run-tests.yaml/badge.svg)](https://github.com/Bilbottom/billiam-database/actions/workflows/run-tests.yaml)
 [![dbt-coverage](coverage-dbt.svg)](https://github.com/google/pybadges)
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Bilbottom/billiam-database)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Bilbottom/billiam-database/main.svg)](https://results.pre-commit.ci/latest/github/Bilbottom/billiam-database/main)
 
 </div>
 

@@ -39,6 +39,6 @@ duckdb = "0.7.1"
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^2.21.0"
+pre-commit = "^3"
 db-query-profiler = {git = "https://github.com/Bilbottom/db-query-profiler", rev = "v0.0.2"}
 dbt-unit-test-coverage = {git = "https://github.com/Bilbottom/dbt-unit-test-coverage", rev = "v0.0.1"}
