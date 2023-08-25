@@ -53,7 +53,14 @@ repos:
     hooks:
       - id: sqlfluff-lint
         name: Lint SQL files
-        exclude: "^.*$" # Exclude everything for now
+        entry: |
+          env GITHUB_WORKSPACE=.
+          sqlfluff lint --processes 0
+        additional_dependencies:
+          - duckdb==0.7.1
+          - dbt-duckdb==1.5.0
+          - sqlfluff-templater-dbt
+        files: "^billiam_database/models/.*.sql$"
 
   # Testing and coverage
   - repo: local
