@@ -1,6 +1,12 @@
 ---
 ci:
-  skip: [poetry-lock, dbt-compile, dbt-unit-test, dbt-unit-test-coverage]
+  skip:
+    - poetry-lock
+    - sqlfluff-lint
+    - sqlfluff-fix
+    - dbt-compile
+    - dbt-unit-test
+    - dbt-unit-test-coverage
 
 default_install_hook_types: [pre-commit, post-commit]
 default_stages: [pre-commit]
@@ -53,7 +59,21 @@ repos:
     hooks:
       - id: sqlfluff-lint
         name: Lint SQL files
-        exclude: "^.*$" # Exclude everything for now
+        entry: |
+          env GITHUB_WORKSPACE=.
+          sqlfluff lint --processes 0
+        additional_dependencies: &sqlfluff-deps
+          - duckdb==0.7.1
+          - dbt-duckdb==1.5.0
+          - sqlfluff-templater-dbt
+        files: &sqlfluff-files "^billiam_database/models/.*.sql$"
+      - id: sqlfluff-fix
+        name: Lint SQL files
+        entry: |
+          env GITHUB_WORKSPACE=.
+          sqlfluff fix --force --show-lint-violations --processes 0
+        additional_dependencies: *sqlfluff-deps
+        files: *sqlfluff-files
 
   # Testing and coverage
   - repo: local

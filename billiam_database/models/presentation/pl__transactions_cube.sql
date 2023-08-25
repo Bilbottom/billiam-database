@@ -23,6 +23,7 @@
 ) }}
 
 final AS (
+    -- noqa: disable=ST06
     SELECT
         GROUPING_ID(
             transaction_date,
@@ -38,17 +39,20 @@ final AS (
         COUNT(DISTINCT transaction_id) AS total_transaction_count,
         COUNT(*) AS total_item_count,
         COUNT(DISTINCT item) AS distinct_item_count,
-        SUM(cost) AS total_cost,
-        AVG(cost) AS average_cost,
-        MIN(cost) AS min_cost,
-        MAX(cost) AS max_cost,
-        STDDEV_POP(cost) AS standard_dev_cost
+        SUM("cost") AS total_cost,
+        AVG("cost") AS average_cost,
+        MIN("cost") AS min_cost,
+        MAX("cost") AS max_cost,
+        STDDEV_POP("cost") AS standard_dev_cost
     FROM int_transaction_items
+    -- noqa: enable=ST06
     {% if is_incremental() %}
+    -- noqa: disable=LT02
     WHERE transaction_date >= (
         SELECT MAX(transaction_date)
         FROM {{ this }}
     )
+    -- noqa: enable=LT02
     {% endif %}
     GROUP BY CUBE(
         transaction_date,

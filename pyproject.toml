@@ -42,3 +42,63 @@ optional = true
 pre-commit = "^3"
 db-query-profiler = {git = "https://github.com/Bilbottom/db-query-profiler", rev = "v0.0.2"}
 dbt-unit-test-coverage = {git = "https://github.com/Bilbottom/dbt-unit-test-coverage", rev = "v0.0.1"}
+
+
+[tool.sqlfluff.core]
+dialect = "duckdb"
+templater = "dbt"
+max_line_length = 120  # ...but try to stay under 80
+exclude_rules = [
+    "LT08",  # Blank line expected but not found after CTE closing bracket
+    "ST07",  # Prefer specifying join keys instead of using USING
+]
+
+[tool.sqlfluff.indentation]
+indented_joins = true
+indented_using_on = true
+indented_on_contents = true
+template_blocks_indent = false
+
+
+###
+# Capitalisation bundle
+# https://docs.sqlfluff.com/en/stable/rules.html#capitalisation-bundle
+###
+
+# https://docs.sqlfluff.com/en/stable/rules.html#rule-capitalisation.keywords
+[tool.sqlfluff.rules.capitalisation.keywords]  # CP01
+capitalisation_policy = "upper"
+
+# https://docs.sqlfluff.com/en/stable/rules.html#rule-capitalisation.identifiers
+[tool.sqlfluff.rules.capitalisation.identifiers]  # CP02
+extended_capitalisation_policy = "lower"
+
+
+###
+# Layout bundle
+# https://docs.sqlfluff.com/en/stable/rules.html#layout-bundle
+###
+
+# https://docs.sqlfluff.com/en/stable/rules.html#rule-layout.indent
+[tool.sqlfluff.layout.type.indent]  # LT02
+line_position = "trailing"
+
+# https://docs.sqlfluff.com/en/stable/rules.html#rule-layout.commas
+[tool.sqlfluff.layout.type.comma]  # LT04
+line_position = "trailing"
+
+
+###
+# References bundle
+# https://docs.sqlfluff.com/en/stable/rules.html#references-bundle
+###
+
+# https://docs.sqlfluff.com/en/stable/rules.html#rule-references.keywords
+[tool.sqlfluff.rules.references.keywords]  # RF04
+ignore_words = ["task"]
+
+# https://docs.sqlfluff.com/en/stable/rules.html#rule-references.quoting
+[tool.sqlfluff.rules.references.quoting]  # RF06
+prefer_quoted_identifiers = false
+prefer_quoted_keywords = true
+ignore_words = ["transaction", "date"]
