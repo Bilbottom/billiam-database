@@ -56,11 +56,18 @@ repos:
         entry: |
           env GITHUB_WORKSPACE=.
           sqlfluff lint --processes 0
-        additional_dependencies:
+        additional_dependencies: &sqlfluff-deps
           - duckdb==0.7.1
           - dbt-duckdb==1.5.0
           - sqlfluff-templater-dbt
-        files: "^billiam_database/models/.*.sql$"
+        files: &sqlfluff-files "^billiam_database/models/.*.sql$"
+      - id: sqlfluff-fix
+        name: Lint SQL files
+        entry: |
+          env GITHUB_WORKSPACE=.
+          sqlfluff fix --force --show-lint-violations --processes 0
+        additional_dependencies: *sqlfluff-deps
+        files: *sqlfluff-files
 
   # Testing and coverage
   - repo: local
