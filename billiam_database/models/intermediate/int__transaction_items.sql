@@ -17,11 +17,12 @@ final AS (
         transaction_date,
         transaction_id,
         item,
-        cost,
+        "cost",
         category,
         counterparty,
         exclusion_flag
     FROM stg_finances
+    -- noqa: disable=LT02
     WHERE transaction_id IN (
         /*
             Only keep the items for transactions that haven't been filtered out.
@@ -29,6 +30,7 @@ final AS (
         SELECT transaction_id
         FROM int_transactions
     )
+    -- noqa: enable=LT02
     ORDER BY row_id
 )
 
