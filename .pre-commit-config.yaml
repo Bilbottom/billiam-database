@@ -60,17 +60,19 @@ repos:
     hooks:
       - id: dbt-compile
         name: Compile the dbt project
-        entry: dbt compile
+        entry: |
+          env GITHUB_WORKSPACE=.
+          dbt compile
         language: system
         pass_filenames: false
-        stages: [pre-commit]
         always_run: true
       - id: dbt-unit-test
         name: Run dbt unit tests
-        entry: dbt test --select tag:unit-test
+        entry: |
+          env GITHUB_WORKSPACE=.
+          dbt test --select tag:unit-test
         language: system
         pass_filenames: false
-        stages: [pre-commit]
         always_run: true
       - id: dbt-unit-test-coverage
         name: Generate dbt coverage report
@@ -79,3 +81,22 @@ repos:
         pass_filenames: false
         stages: [post-commit]
         always_run: true
+
+  # Validate dbt project
+#  - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
+#    rev: v1.1.0
+#    hooks:
+#      - id: check-column-desc-are-same
+#        name: Check column descriptions are the same
+#      - id: check-model-columns-have-desc
+#        name: Check the model columns have description
+#      - id: check-model-has-all-columns
+#        name: Check the model has all columns in the YAML file
+#      - id: check-model-has-description
+#        name: Check the model has description
+#      - id: check-model-has-properties-file
+#        name: Check the model has properties file
+#      - id: check-script-semicolon
+#        name: Ensure that the script does not have a semicolon
+#      - id: check-script-has-no-table-name
+#        name: Ensures only `ref` and `source` are used
