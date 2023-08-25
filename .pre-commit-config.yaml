@@ -1,6 +1,12 @@
 ---
 ci:
-  skip: [poetry-lock, dbt-compile, dbt-unit-test, dbt-unit-test-coverage]
+  skip:
+    - poetry-lock
+    - sqlfluff-lint
+    - sqlfluff-fix
+    - dbt-compile
+    - dbt-unit-test
+    - dbt-unit-test-coverage
 
 default_install_hook_types: [pre-commit, post-commit]
 default_stages: [pre-commit]
