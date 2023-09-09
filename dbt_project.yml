@@ -10,6 +10,7 @@ profile: default
 asset-paths: ["billiam_database/assets"]
 macro-paths: ["billiam_database/macros"]
 model-paths: ["billiam_database/models"]
+seed-paths: ["billiam_database/seeds"]
 test-paths: ["billiam_database/tests"]
 
 packages-install-path: &packages-install-path packages
@@ -67,8 +68,18 @@ models:
 #    +docs:
 #      show: false
 
+seeds:
+  billiam_database:
+    +enabled: true
+    +schema: seeds
+    counterparty_exclusions:
+      +column_types:
+        counterparty: varchar(32)
+
 # https://docs.getdbt.com/reference/test-configs
 tests:
   +docs:
     node_color: Indigo
     show: false
+  billiam_database:
+    +enabled: true
