@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 source .env  # For GITHUB_WORKSPACE
 
 dbt clean
