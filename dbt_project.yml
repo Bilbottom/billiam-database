@@ -7,30 +7,28 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 profile: default
 
+asset-paths: ["billiam_database/assets"]
+macro-paths: ["billiam_database/macros"]
 model-paths: ["billiam_database/models"]
 seed-paths: ["billiam_database/seeds"]
 test-paths: ["billiam_database/tests"]
-analysis-paths: ["billiam_database/analysis"]
-macro-paths: ["billiam_database/macros"]
-snapshot-paths: ["billiam_database/snapshots"]
-asset-paths: ["billiam_database/assets"]
 
-packages-install-path: packages
-clean-targets: ["target", "logs", "packages"]
+packages-install-path: &packages-install-path packages
+clean-targets: [target, logs, *packages-install-path]
 
 dispatch:
   - macro_namespace: dbt
     search_order: ["dbt_project_evaluator", "dbt"]
 
-on-run-start:
-  - "{{ create_udfs() }}"
-on-run-end:
-  - "{% if target.name == 'prod' %}DROP SCHEMA IF EXISTS dbt_test__audit CASCADE;{% endif %}"
-
 quoting:
   database: false
   schema: false
   identifier: false
+
+on-run-start:
+  - "{{ create_udfs() }}"
+on-run-end:
+  - "{% if target.name == 'prod' %}DROP SCHEMA IF EXISTS dbt_test__audit CASCADE;{% endif %}"
 
 models:
   billiam_database:
@@ -70,8 +68,18 @@ models:
 #    +docs:
 #      show: false
 
+seeds:
+  billiam_database:
+    +enabled: true
+    +schema: seeds
+    counterparty_exclusions:
+      +column_types:
+        counterparty: varchar(32)
+
 # https://docs.getdbt.com/reference/test-configs
 tests:
   +docs:
     node_color: Indigo
     show: false
+  billiam_database:
+    +enabled: true
