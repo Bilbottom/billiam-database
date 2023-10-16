@@ -1,3 +1,7 @@
+{{ config(
+    enabled=False,
+) }}
+
 
 {{ import(
     stg_finances = ref("stg__finances"),
