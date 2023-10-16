@@ -1,4 +1,4 @@
-source .env  # For GITHUB_WORKSPACE
+source .env  # For GITHUB_WORKSPACE, DBT_PROFILES_DIR, and DBT_PROJECT_DIR
 
 dbt clean
 dbt deps

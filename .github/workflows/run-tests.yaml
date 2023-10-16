@@ -5,6 +5,10 @@ run-name: Run project tests
 
 on: [pull_request, workflow_dispatch]
 
+env:
+  DBT_PROJECT_DIR: ${{ vars.DBT_PROJECT_DIR }}
+  DBT_PROFILES_DIR: ${{ vars.DBT_PROFILES_DIR }}
+
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: false
@@ -34,12 +38,12 @@ jobs:
 
       - name: Install dbt dependencies ➕
         run: |
-          poetry run dbt clean --profiles-dir .
-          poetry run dbt deps --profiles-dir .
-          poetry run dbt run-operation set_ci_environment --profiles-dir .
+          poetry run dbt clean
+          poetry run dbt deps
+          poetry run dbt run-operation set_ci_environment
 
       - name: Parse dbt 🗃️
-        run: poetry run dbt parse --profiles-dir .
+        run: poetry run dbt parse
 
       - name: Run dbt unit tests 🧪
-        run: poetry run dbt test --select tag:unit-test --profiles-dir .
+        run: poetry run dbt test --select tag:unit-test

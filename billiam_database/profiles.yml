@@ -18,7 +18,7 @@ default:
   outputs:
     dev: &connection
       type: duckdb
-      path: "{{ env_var('GITHUB_WORKSPACE', '.') }}/billiam_database/billiam.duckdb"
+      path: "{{ env_var('GITHUB_WORKSPACE', '.') }}/billiam.duckdb"
 
     # Re-use the same connection details so that we can use the same connection
     # for both dev and prod, but different targets allow us to do conditional
