@@ -6,6 +6,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+env:
+  DBT_PROJECT_DIR: ${{ vars.DBT_PROJECT_DIR }}
+  DBT_PROFILES_DIR: ${{ vars.DBT_PROFILES_DIR }}
+
 permissions:
   contents: write
 
@@ -35,14 +39,14 @@ jobs:
 
       - name: Install dbt dependencies ➕
         run: |
-          poetry run dbt clean --profiles-dir .
-          poetry run dbt deps --profiles-dir .
-          poetry run dbt run-operation set_ci_environment --profiles-dir .
+          poetry run dbt clean
+          poetry run dbt deps
+          poetry run dbt run-operation set_ci_environment
 
       - name: Compile dbt docs 📝
-        run: poetry run dbt docs generate --profiles-dir .
+        run: poetry run dbt docs generate
 
       - name: Deploy dbt docs 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: target
+          folder: billiam_database/target
