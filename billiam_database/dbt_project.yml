@@ -3,15 +3,15 @@ name: billiam_database
 
 config-version: 2
 version: 0.0.0
-require-dbt-version: [">=1.0.0", "<2.0.0"]
+require-dbt-version: [">=1.5.0", "<2.0.0"]
 
 profile: default
 
-asset-paths: ["billiam_database/assets"]
-macro-paths: ["billiam_database/macros"]
-model-paths: ["billiam_database/models"]
-seed-paths: ["billiam_database/seeds"]
-test-paths: ["billiam_database/tests"]
+asset-paths: [assets]
+macro-paths: [macros]
+model-paths: [models]
+seed-paths: [seeds]
+test-paths: [tests]
 
 packages-install-path: &packages-install-path packages
 clean-targets: [target, logs, *packages-install-path]
