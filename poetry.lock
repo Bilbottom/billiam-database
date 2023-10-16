@@ -286,19 +286,19 @@ resolved_reference = "6f6858a0b3d407679dc2ddbf91c3e66ecf43d1e7"
 
 [[package]]
 name = "dbt-core"
-version = "1.5.0"
+version = "1.5.8"
 description = "With dbt, data analysts and engineers can build analytics the way engineers build applications."
 optional = false
 python-versions = ">=3.7.2"
 files = [
-    {file = "dbt-core-1.5.0.tar.gz", hash = "sha256:d6d43b7ff0f12765e7e85559c1a109eaa23a7536b26b3f963d0c19263f69b3c4"},
-    {file = "dbt_core-1.5.0-py3-none-any.whl", hash = "sha256:0761fb8287830d7c8990517340238c62c0085e8b8351952440fe03fdd30ee817"},
+    {file = "dbt-core-1.5.8.tar.gz", hash = "sha256:3965ca86fe55f791a96aedbdc64462b52c2a9a43012af5edcf509cb4c89fa2fe"},
+    {file = "dbt_core-1.5.8-py3-none-any.whl", hash = "sha256:e29eb922207ea984965706c8de65959f3e54fc1f5aa141aa22f3ce389585676b"},
 ]
 
 [package.dependencies]
 agate = ">=1.6,<1.7.1"
 cffi = ">=1.9,<2.0.0"
-click = ">=7.0,<9"
+click = "<9"
 colorama = ">=0.3.9,<0.4.7"
 dbt-extractor = ">=0.4.1,<0.5.0"
 hologram = ">=0.0.14,<=0.0.16"
@@ -311,23 +311,23 @@ minimal-snowplow-tracker = "0.0.2"
 networkx = {version = ">=2.3,<3", markers = "python_version >= \"3.8\""}
 packaging = ">20.9"
 pathspec = ">=0.9,<0.12"
-protobuf = ">=3.18.3"
+protobuf = ">=4.0.0"
 pytz = ">=2015.7"
 pyyaml = ">=6.0"
 requests = "<3.0.0"
-sqlparse = ">=0.2.3,<0.4.4"
+sqlparse = ">=0.2.3,<0.5"
 typing-extensions = ">=3.7.4"
 werkzeug = ">=1,<3"
 
 [[package]]
 name = "dbt-duckdb"
-version = "1.5.0"
+version = "1.5.2"
 description = "The duckdb adapter plugin for dbt (data build tool)"
 optional = false
 python-versions = "*"
 files = [
-    {file = "dbt-duckdb-1.5.0.tar.gz", hash = "sha256:e438dcd8645df9b37f15cebffe5263e669a51cd24b3728f1460cf5f28c994029"},
-    {file = "dbt_duckdb-1.5.0-py3-none-any.whl", hash = "sha256:f45a19499a282120566814fedd98bc21eaf5a8fc2a2644cb5eb7d87807eb4ca9"},
+    {file = "dbt-duckdb-1.5.2.tar.gz", hash = "sha256:3407216c21bf78fd128dccfcff3ec4bf260fb145e633432015bc7d0f123e8e4b"},
+    {file = "dbt_duckdb-1.5.2-py3-none-any.whl", hash = "sha256:5d18254807bbc3e61daf4f360208ad886adf44b8525e1998168290fbe73a5cbb"},
 ]
 
 [package.dependencies]
@@ -1244,14 +1244,19 @@ dev = ["autoflake", "black", "duckdb (>=0.6)", "isort", "mypy (>=0.990)", "panda
 
 [[package]]
 name = "sqlparse"
-version = "0.4.3"
+version = "0.4.4"
 description = "A non-validating SQL parser."
 optional = false
 python-versions = ">=3.5"
 files = [
-    {file = "sqlparse-0.4.3-py3-none-any.whl", hash = "sha256:0323c0ec29cd52bceabc1b4d9d579e311f3e4961b98d174201d5622a23b85e34"},
-    {file = "sqlparse-0.4.3.tar.gz", hash = "sha256:69ca804846bb114d2ec380e4360a8a340db83f0ccf3afceeb1404df028f57268"},
+    {file = "sqlparse-0.4.4-py3-none-any.whl", hash = "sha256:5430a4fe2ac7d0f93e66f1efc6e1338a41884b7ddf2a350cedd20ccc4d9d28f3"},
+    {file = "sqlparse-0.4.4.tar.gz", hash = "sha256:d446183e84b8349fa3061f0fe7f06ca94ba65b426946ffebe6e3e8295332420c"},
 ]
+
+[package.extras]
+dev = ["build", "flake8"]
+doc = ["sphinx"]
+test = ["pytest", "pytest-cov"]
 
 [[package]]
 name = "text-unidecode"
@@ -1373,4 +1378,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "6fcd5d8d03eb7fc846a73c5d782581a352b73e42dd1a9cde0370a9b50cd471be"
+content-hash = "9f5bafe4d7f55d7fd9cf4c6f40e0445f6e340f03ddf7eb086b1646de033cc765"

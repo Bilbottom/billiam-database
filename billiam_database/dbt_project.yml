@@ -3,7 +3,7 @@ name: billiam_database
 
 config-version: 2
 version: 0.0.0
-require-dbt-version: [">=1.5.0", "<2.0.0"]
+require-dbt-version: [">=1.5.4", "<2.0.0"]
 
 profile: default
 
@@ -33,7 +33,7 @@ on-run-end:
 models:
   billiam_database:
     +pre-hook:
-      - "SET log_query_path='logs/{{ this | replace('.', '__') }}.log';"
+      - "SET log_query_path='billiam_database/logs/{{ this | replace('.', '__') }}.log';"
     +post-hook:
       - "SET log_query_path='';"
     +group: billiam

@@ -31,8 +31,8 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-dbt-core = "1.5.0"
-dbt-duckdb = "1.5.0"
+dbt-core = "1.5.8"
+dbt-duckdb = "1.5.2"
 duckdb = "0.7.1"
 
 [tool.poetry.group.dev.dependencies]
