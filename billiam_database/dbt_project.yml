@@ -12,9 +12,7 @@ macro-paths: [macros]
 model-paths: [models]
 seed-paths: [seeds]
 test-paths: [tests]
-
-packages-install-path: &packages-install-path packages
-clean-targets: [target, logs, *packages-install-path]
+clean-targets: [target, logs, dbt_packages]
 
 dispatch:
   - macro_namespace: dbt

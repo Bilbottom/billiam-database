@@ -2,17 +2,20 @@
 #   GITHUB_WORKSPACE: The root of the repository
 #   DBT_PROJECT_DIR: The directory containing the dbt_project.yml file
 #   DBT_PROFILES_DIR: The directory containing the profiles.yml file
-source .env
+#
+# These should be configured in a .env file so that the dotenv CLI can
+# load them
 
-dbt clean
-dbt deps
+# dotenv set GITHUB_WORKSPACE ...
+# dotenv set DBT_PROJECT_DIR ...
+# dotenv set DBT_PROFILES_DIR ...
 
-# TODO: The counterparty seed is causing a top-level packages directory to be created. Stop this from happening
-#dbt source freshness
-#dbt run --full-refresh
-#dbt test --store-failures
+dotenv run -- dbt clean
+dotenv run -- dbt deps
 
-dbt build --full-refresh
+# TODO: A top-level `dbt_packages` directory is being created. Stop this from happening
+dotenv run -- dbt source freshness
+dotenv run -- dbt build --full-refresh
 
-dbt docs generate
-dbt docs serve --port=8085
+dotenv run -- dbt docs generate
+dotenv run -- dbt docs serve --port=8085
