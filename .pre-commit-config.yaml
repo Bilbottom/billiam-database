@@ -55,7 +55,7 @@ repos:
         name: Make code pretty
 
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 2.3.3
+    rev: 2.3.4
     hooks:
       - id: sqlfluff-lint
         name: Lint SQL files
