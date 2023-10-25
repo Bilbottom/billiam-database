@@ -1,10 +1,8 @@
-{{
-    config(
-        alias="task_details",
-        materialized="view",
-        tags=["daily-tracker"]
-    )
-}}
+{{ config(
+    alias="task_details",
+    materialized="view",
+    tags=["daily-tracker"]
+) }}
 
 
 {{ import(

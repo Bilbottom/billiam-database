@@ -1,9 +1,8 @@
-{{
-    config(
-        alias="finances",
-        tags=["finances"]
-    )
-}}
+{{ config(
+    alias="finances",
+    tags=["finances"]
+) }}
+
 
 {{ import(
     src_finances = source("raw", "finances"),

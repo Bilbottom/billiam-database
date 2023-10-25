@@ -1,15 +1,13 @@
-{{
-    config(
-        alias="task_details",
-        tags=["daily-tracker"]
-    )
-}}
+{{ config(
+    alias="task_details",
+    tags=["daily-tracker"]
+) }}
 
 
 -- noqa: disable=PRS
 -- The `interval` column in `stg__daily_tracker` can't be parsed
 {{ import(
-    src_tracker = ref("stg__daily_tracker"),
+    src_tracker = ref("stg__daily_tracker")
 ) }}
 -- noqa: enable=PRS
 

@@ -1,9 +1,8 @@
-{{
-    config(
-        alias="daily_tracker",
-        tags=["daily-tracker"]
-    )
-}}
+{{ config(
+    alias="daily_tracker",
+    tags=["daily-tracker"]
+) }}
+
 
 {{ import(
     src_tracker = source("raw", "daily_tracker"),

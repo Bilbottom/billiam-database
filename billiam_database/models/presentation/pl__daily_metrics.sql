@@ -1,9 +1,7 @@
-{{
-    config(
-        alias="daily_metrics",
-        tags=["daily-tracker", "finances"]
-    )
-}}
+{{ config(
+    alias="daily_metrics",
+    tags=["daily-tracker", "finances"]
+) }}
 
 /*
     Will break this down into smaller models later

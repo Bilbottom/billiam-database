@@ -1,8 +1,5 @@
-{{
-    config(
-        alias="monzo_transactions"
-    )
-}}
+{{ config(alias="monzo_transactions") }}
+
 
 {{ import(
     src_monzo_transactions = source("raw", "monzo_transactions"),
