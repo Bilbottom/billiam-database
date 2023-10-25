@@ -10,16 +10,16 @@
     expand_columns=false
 ) }}
 
-final AS (
+final as (
     -- noqa: disable=ST06
-    SELECT
-        date_time::TIMESTAMP AS date_time,
-        TRIM("task") AS "task",
-        COALESCE(TRIM(detail), '') AS detail,
-        "interval"::INTEGER AS "interval",
-        TRIM(company) AS company
-    FROM src_tracker
+    select
+        date_time::timestamp as date_time,
+        trim("task") as "task",
+        coalesce(trim(detail), '') as detail,
+        "interval"::integer as "interval",
+        trim(company) as company
+    from src_tracker
     -- noqa: enable=ST06
 )
 
-SELECT * FROM final
+select * from final

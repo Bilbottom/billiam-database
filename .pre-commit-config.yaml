@@ -59,15 +59,11 @@ repos:
     hooks:
       - id: sqlfluff-lint
         name: Lint SQL files
-        files: &sqlfluff-files "^billiam_database/models/.*.sql$"
-        additional_dependencies: &sqlfluff-deps
+        files: "^billiam_database/models/.*.sql$"
+        additional_dependencies:
           - duckdb==0.7.1
           - dbt-duckdb==1.5.0
           - sqlfluff-templater-dbt
-      - id: sqlfluff-fix
-        name: Fix SQL files
-        files: *sqlfluff-files
-        additional_dependencies: *sqlfluff-deps
 
   # Testing and coverage
   - repo: local

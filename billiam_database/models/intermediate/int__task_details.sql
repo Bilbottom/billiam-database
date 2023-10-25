@@ -1,7 +1,4 @@
-{{ config(
-    alias="task_details",
-    tags=["daily-tracker"]
-) }}
+{{ config(alias="task_details") }}
 
 
 -- noqa: disable=PRS
@@ -11,29 +8,29 @@
 ) }}
 -- noqa: enable=PRS
 
-final AS (
+final as (
     -- noqa: disable=ST06
-    SELECT
-        GROUPING_ID("task", detail) AS group_id,
-        CASE GROUPING_ID("task", detail)
-            WHEN 0 THEN 'Task and detail'
-            WHEN 1 THEN 'Task only'
-        END AS group_description,
+    select
+        grouping_id("task", detail) as group_id,
+        case grouping_id("task", detail)
+            when 0 then 'Task and detail'
+            when 1 then 'Task only'
+        end as group_description,
         "task",
         detail,
 
-        COUNT(*) AS total_records,
-        SUM("interval") AS total_time,
-        MIN(date_time) AS start_time,
-        MAX(date_time) AS end_time
-    FROM src_tracker
+        count(*) as total_records,
+        sum("interval") as total_time,
+        min(date_time) as start_time,
+        max(date_time) as end_time,
+    from src_tracker
     -- noqa: disable=CP02, RF06, PRS
     -- SQLFluff thinks that `GROUPING SETS` is a column name?!
-    GROUP BY GROUPING SETS (
+    group by grouping sets (
         ("task", detail),
         ("task")
     )
     -- noqa: enable=CP02, RF06, PRS
 )
 
-SELECT * FROM final
+select * from final
