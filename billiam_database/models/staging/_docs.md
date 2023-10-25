@@ -33,3 +33,16 @@ The source of this model is a Google Sheet that I maintain manually (🤮). Each
 This source is already heavily denormalised (it's a single table!) so some of the details aren't quite perfect such as associating payments with transactions. This will hopefully be updated in the future which would mean updating this project to do the denormalisation here.
 
 {% enddocs %}
+
+## [stg\_\_monzo_transactions](stg__monzo_transactions.sql)
+
+{% docs stg__monzo_transactions %}
+
+Transaction-level history from Monzo.
+
+This is a Google Sheet that Monzo provides. This source provides values in two ways:
+
+1. Additional data per transaction, such as the address and local currency
+2. Data validation with my item-level history since, as a human, I'm prone to error
+
+{% enddocs %}

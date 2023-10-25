@@ -10,6 +10,7 @@
 # dotenv set DBT_PROJECT_DIR ...
 # dotenv set DBT_PROFILES_DIR ...
 
+dotenv run -- dbt debug
 dotenv run -- dbt clean
 dotenv run -- dbt deps
 

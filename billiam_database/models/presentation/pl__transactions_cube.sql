@@ -6,9 +6,8 @@
         "transaction_date",
         "category",
         "counterparty",
-        "exclusion_flag"
-    ],
-    tags=["finances"]
+        "exclusion_flag",
+    ]
 ) }}
 
 
@@ -20,39 +19,39 @@
     int_transaction_items = ref("int__transaction_items")
 ) }}
 
-final AS (
+final as (
     -- noqa: disable=ST06
-    SELECT
-        GROUPING_ID(
+    select
+        grouping_id(
             transaction_date,
             category,
             counterparty,
             exclusion_flag
-        ) AS group_id,
+        ) as group_id,
         transaction_date,
         category,
         counterparty,
         exclusion_flag,
 
-        COUNT(DISTINCT transaction_id) AS total_transaction_count,
-        COUNT(*) AS total_item_count,
-        COUNT(DISTINCT item) AS distinct_item_count,
-        SUM("cost") AS total_cost,
-        AVG("cost") AS average_cost,
-        MIN("cost") AS min_cost,
-        MAX("cost") AS max_cost,
-        STDDEV_POP("cost") AS standard_dev_cost
-    FROM int_transaction_items
+        count(distinct transaction_id) as total_transaction_count,
+        count(*) as total_item_count,
+        count(distinct item) as distinct_item_count,
+        sum("cost") as total_cost,
+        avg("cost") as average_cost,
+        min("cost") as min_cost,
+        max("cost") as max_cost,
+        stddev_pop("cost") as standard_dev_cost,
+    from int_transaction_items
     -- noqa: enable=ST06
     {% if is_incremental() %}
     -- noqa: disable=LT02
-    WHERE transaction_date >= (
-        SELECT MAX(transaction_date)
-        FROM {{ this }}
+    where transaction_date >= (
+        select max(transaction_date)
+        from {{ this }}
     )
     -- noqa: enable=LT02
     {% endif %}
-    GROUP BY CUBE(
+    group by cube(
         transaction_date,
         category,
         counterparty,
@@ -60,4 +59,4 @@ final AS (
     )
 )
 
-SELECT * FROM final
+select * from final

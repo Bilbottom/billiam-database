@@ -1,24 +1,21 @@
-{{ config(
-    alias="transactions",
-    tags=["finances"]
-) }}
+{{ config(alias="transactions") }}
 
 
 {{ import(
     stg_finances = ref("stg__finances")
 ) }}
 
-final AS (
-    SELECT
+final as (
+    select
         transaction_id,
         transaction_date,
-        ROUND(SUM("cost"), 2) AS "cost",
-        COUNT(*) AS item_count,
-        GROUP_CONCAT(DISTINCT counterparty, '||') AS counterparty
-    FROM stg_finances
-    GROUP BY transaction_id, transaction_date
-    HAVING NOT (COUNT(*) = 2 AND ROUND(SUM("cost"), 2) = 0)  /* Exclude credit repayment transactions */
-    ORDER BY transaction_id
+        round(sum("cost"), 2) as "cost",
+        count(*) as item_count,
+        group_concat(distinct counterparty, '||') as counterparty,
+    from stg_finances
+    group by transaction_id, transaction_date
+    having not (count(*) = 2 and round(sum("cost"), 2) = 0)  /* Exclude credit repayment transactions */
+    order by transaction_id
 )
 
-SELECT * FROM final
+select * from final

@@ -1,7 +1,6 @@
 {{ config(
     alias="task_details",
-    materialized="view",
-    tags=["daily-tracker"]
+    materialized="view"
 ) }}
 
 
@@ -9,17 +8,17 @@
     src_task_details = ref("int__task_details")
 ) }}
 
-final AS (
-    SELECT
-        group_id::INT AS group_id,
+final as (
+    select
+        group_id::int as group_id,
         group_description,
         "task",
         detail,
-        total_records::INT AS total_records,
-        total_time::INT AS total_time,
+        total_records::int as total_records,
+        total_time::int as total_time,
         start_time,
-        end_time
-    FROM src_task_details
+        end_time,
+    from src_task_details
 )
 
-SELECT * FROM final
+select * from final

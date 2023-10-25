@@ -10,21 +10,21 @@
     expand_columns=false
 ) }}
 
-final AS (
-    -- noqa: disable=ST06
-    SELECT
-        ROW_NUMBER() OVER () AS row_id,  /* Just for maintaining uniqueness */
-        "Transaction"::INT AS transaction_id,
-        "Date"::DATE AS transaction_date,
-        TRIM(item) AS item,
-        TRANSLATE("cost", '£,', '')::DECIMAL(18, 2) AS "cost",
-        TRIM(category) AS category,
-        TRIM(retailer) AS counterparty,
-        TRIM("Payment Method") AS payment_method,  -- noqa: RF05
-        COALESCE(exclusion::BOOL, FALSE) AS exclusion_flag,
-        "Reimbursement Transaction"::INT AS reimbursement_transaction_id  -- noqa: RF05
-    FROM src_finances
-    -- noqa: enable=ST06
+final as (
+    -- noqa: disable=ST06, RF06
+    select
+        row_number() over () as row_id,  /* Just for maintaining uniqueness */
+        "Transaction"::int as transaction_id,
+        "Date"::date as transaction_date,
+        trim("Item") as item,
+        translate("Cost", '£,', '')::decimal(18, 2) as "cost",
+        trim("Category") as category,
+        trim("Retailer") as counterparty,
+        trim("Payment Method") as payment_method,  -- noqa: RF05
+        coalesce("Exclusion"::bool, false) as exclusion_flag,
+        "Reimbursement Transaction"::int as reimbursement_transaction_id  -- noqa: RF05
+    from src_finances
+    -- noqa: enable=ST06, RF06
 )
 
-SELECT * FROM final
+select * from final

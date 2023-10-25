@@ -2,11 +2,16 @@
 ci:
   skip:
     - poetry-lock
-    - sqlfluff-lint
-    - sqlfluff-fix
     - dbt-compile
     - dbt-unit-test
     - dbt-unit-test-coverage
+    - sqlfluff-lint
+    - check-column-desc-are-same
+    - check-script-semicolon
+    - check-model-columns-have-desc
+    - check-model-has-description
+    - check-model-has-properties-file
+    - check-model-has-all-columns
 
 default_install_hook_types: [pre-commit, post-commit]
 default_stages: [pre-commit]
@@ -54,23 +59,6 @@ repos:
       - id: prettier
         name: Make code pretty
 
-  - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 2.3.4
-    hooks:
-      - id: sqlfluff-lint
-        name: Lint SQL files
-        entry: sqlfluff lint --processes 0
-        additional_dependencies: &sqlfluff-deps
-          - duckdb==0.7.1
-          - dbt-duckdb==1.5.0
-          - sqlfluff-templater-dbt
-        files: &sqlfluff-files "^billiam_database/models/.*.sql$"
-      - id: sqlfluff-fix
-        name: Fix SQL files
-        entry: sqlfluff fix --force --show-lint-violations --processes 0
-        additional_dependencies: *sqlfluff-deps
-        files: *sqlfluff-files
-
   # Testing and coverage
   - repo: local
     hooks:
@@ -94,21 +82,48 @@ repos:
         stages: [post-commit]
         always_run: true
 
-  # Validate dbt project
-#  - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
-#    rev: v1.1.0
-#    hooks:
-#      - id: check-column-desc-are-same
-#        name: Check column descriptions are the same
-#      - id: check-model-columns-have-desc
-#        name: Check the model columns have description
-#      - id: check-model-has-all-columns
-#        name: Check the model has all columns in the YAML file
-#      - id: check-model-has-description
-#        name: Check the model has description
-#      - id: check-model-has-properties-file
-#        name: Check the model has properties file
-#      - id: check-script-semicolon
-#        name: Ensure that the script does not have a semicolon
-#      - id: check-script-has-no-table-name
-#        name: Ensures only `ref` and `source` are used
+  # Lint and validate dbt project
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 2.3.4
+    hooks:
+      - id: sqlfluff-lint
+        name: Lint SQL files
+        files: &model-files "^billiam_database/models/.*.sql$"
+        additional_dependencies:
+          - duckdb==0.7.1
+          - dbt-duckdb==1.5.0
+          - sqlfluff-templater-dbt
+
+  - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
+    rev: v1.1.1
+    hooks:
+      - id: check-column-desc-are-same
+        name: Check column descriptions are the same
+        files: *model-files
+        args: &checkpoint-args-manifest
+          - "--manifest"
+          - "billiam_database/target/manifest.json"
+      - id: check-script-semicolon
+        name: Ensure that the script does not have a semicolon
+        files: *model-files
+        args: *checkpoint-args-manifest
+      - id: check-model-columns-have-desc
+        name: Check the model columns have description
+        files: *model-files
+        args: *checkpoint-args-manifest
+      - id: check-model-has-description
+        name: Check the model has description
+        files: *model-files
+        args: *checkpoint-args-manifest
+      - id: check-model-has-properties-file
+        name: Check the model has properties file
+        files: *model-files
+        args: *checkpoint-args-manifest
+      - id: check-model-has-all-columns
+        name: Check the model has all columns in the YAML file
+        files: *model-files
+        args:
+          - "--manifest"
+          - "billiam_database/target/manifest.json"
+          - "--catalog"
+          - "billiam_database/target/catalog.json"

@@ -1,7 +1,4 @@
-{{ config(
-    alias="transaction_items",
-    tags=["finances"]
-) }}
+{{ config(alias="transaction_items") }}
 
 
 {{ import(
@@ -9,8 +6,8 @@
     int_transactions = ref("int__transactions")
 ) }}
 
-final AS (
-    SELECT
+final as (
+    select
         row_id,
         transaction_date,
         transaction_id,
@@ -18,18 +15,18 @@ final AS (
         "cost",
         category,
         counterparty,
-        exclusion_flag
-    FROM stg_finances
+        exclusion_flag,
+    from stg_finances
     -- noqa: disable=LT02
-    WHERE transaction_id IN (
+    where transaction_id in (
         /*
             Only keep the items for transactions that haven't been filtered out.
         */
-        SELECT transaction_id
-        FROM int_transactions
+        select transaction_id
+        from int_transactions
     )
     -- noqa: enable=LT02
-    ORDER BY row_id
+    order by row_id
 )
 
-SELECT * FROM final
+select * from final
