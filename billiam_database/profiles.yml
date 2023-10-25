@@ -18,11 +18,17 @@ default:
   outputs:
     dev: &connection
       type: duckdb
-      path: "{{ env_var('GITHUB_WORKSPACE', '.') }}/billiam_database/billiam.duckdb"
+      path: "billiam_database/billiam.duckdb"
 
     # Re-use the same connection details so that we can use the same connection
     # for both dev and prod, but different targets allow us to do conditional
     # actions in things like the pre- and post-hooks.
     prod: *connection
+
+    # SQLFluff accesses the path relative to the dbt project file, rather than
+    # relative to the project root.
+    sqlfluff:
+      type: duckdb
+      path: "billiam.duckdb"
 
   target: dev
