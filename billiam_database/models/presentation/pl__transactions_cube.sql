@@ -1,17 +1,15 @@
-{{
-    config(
-        alias="transactions_cube",
-        materialized="incremental",
-        unique_key=[
-            "group_id",
-            "transaction_date",
-            "category",
-            "counterparty",
-            "exclusion_flag"
-        ],
-        tags=["finances"]
-    )
-}}
+{{ config(
+    alias="transactions_cube",
+    materialized="incremental",
+    unique_key=[
+        "group_id",
+        "transaction_date",
+        "category",
+        "counterparty",
+        "exclusion_flag"
+    ],
+    tags=["finances"]
+) }}
 
 
 /*

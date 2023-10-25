@@ -1,9 +1,7 @@
-{{
-    config(
-        alias="transactions",
-        tags=["finances"]
-    )
-}}
+{{ config(
+    alias="transactions",
+    tags=["finances"]
+) }}
 
 
 {{ import(

@@ -23,10 +23,23 @@ quoting:
   schema: false
   identifier: false
 
+vars:
+  unit_tests_config:
+    input_format: "csv"
+    column_separator: "|"
+
 on-run-start:
   - "{{ create_udfs() }}"
 on-run-end:
   - "{% if target.name == 'prod' %}DROP SCHEMA IF EXISTS dbt_test__audit CASCADE;{% endif %}"
+
+seeds:
+  billiam_database:
+    +enabled: true
+    +schema: seeds
+    counterparty_exclusions:
+      +column_types:
+        counterparty: varchar(32)
 
 models:
   billiam_database:
@@ -65,14 +78,6 @@ models:
 #    +schema: elementary
 #    +docs:
 #      show: false
-
-seeds:
-  billiam_database:
-    +enabled: true
-    +schema: seeds
-    counterparty_exclusions:
-      +column_types:
-        counterparty: varchar(32)
 
 # https://docs.getdbt.com/reference/test-configs
 tests:
