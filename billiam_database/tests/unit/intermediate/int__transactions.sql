@@ -1,5 +1,3 @@
-{{ config(tags=["unit-test"]) }}
-
  -- depends_on: {{ ref("stg__finances") }}
 
 

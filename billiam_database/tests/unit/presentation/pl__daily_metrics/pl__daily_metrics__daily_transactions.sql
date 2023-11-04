@@ -1,6 +1,3 @@
-{{ config(tags=["unit-test"]) }}
-
-
 {% call dbt_unit_testing.test(
     "pl__daily_metrics",
     "The date axis should be generated.",
