@@ -1,6 +1,3 @@
-{{ config(tags=["unit-test"]) }}
-
-
 {% call dbt_unit_testing.test(
     "int__task_details",
     "Items are aggregated over two grains."

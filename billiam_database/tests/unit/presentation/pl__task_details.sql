@@ -1,6 +1,3 @@
-{{ config(tags=["unit-test"]) }}
-
-
 {% call dbt_unit_testing.test(
     "pl__task_details",
     "The presentation object is a copy-and-paste from the intermediate object."

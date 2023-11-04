@@ -1,6 +1,3 @@
-{{ config(tags=["unit-test"]) }}
-
-
 {% call dbt_unit_testing.test(
     "int__transaction_items",
     "Only items whose transactions haven't been excluded should remain."

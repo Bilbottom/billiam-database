@@ -1,6 +1,3 @@
-{{ config(tags=["unit-test"]) }}
-
-
 {% call dbt_unit_testing.test(
     "stg__finances",
     "Strings are trimmed and nulls are replaced with empty strings."
