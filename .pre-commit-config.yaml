@@ -84,7 +84,7 @@ repos:
 
   # Lint and validate dbt project
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 3.0.0a4
+    rev: 3.0.0a5
     hooks:
       - id: sqlfluff-lint
         name: Lint SQL files
