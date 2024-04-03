@@ -11,7 +11,7 @@
 # dotenv set DBT_PROFILES_DIR ...
 
 dotenv run -- dbt debug
-dotenv run -- dbt clean
+dotenv run -- dbt clean --no-clean-project-files-only
 dotenv run -- dbt deps
 
 # TODO: A top-level `dbt_packages` directory is being created. Stop this from happening

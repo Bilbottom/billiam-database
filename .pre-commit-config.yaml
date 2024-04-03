@@ -5,7 +5,6 @@ ci:
     - poetry-lock
     - dbt-compile
     - dbt-unit-test
-    - dbt-unit-test-coverage
     - sqlfluff-lint
     - check-column-desc-are-same
     - check-script-semicolon

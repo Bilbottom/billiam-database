@@ -152,3 +152,30 @@ models:
       Transaction history rolled up into an OLAP cube.
 
       Not helpful for me, but illustrates the usage of incremental models.
+    columns:
+      - name: group_id
+        description: The group of the transactions. Not for use.
+      - name: transaction_date
+        description: The date of the transaction.
+      - name: category
+        description: The category of the transaction.
+      - name: counterparty
+        description: The counterparty of the transaction.
+      - name: exclusion_flag
+        description: Whether the transaction has the exclusion flag.
+      - name: total_transaction_count
+        description: Total number of transactions.
+      - name: total_item_count
+        description: Total number of items.
+      - name: distinct_item_count
+        description: Total number of distinct items.
+      - name: total_cost
+        description: Total cost of all transactions.
+      - name: average_cost
+        description: Average cost of all transactions.
+      - name: min_cost
+        description: Minimum cost of all transactions.
+      - name: max_cost
+        description: Maximum cost of all transactions.
+      - name: standard_dev_cost
+        description: Standard deviation of all transactions.
