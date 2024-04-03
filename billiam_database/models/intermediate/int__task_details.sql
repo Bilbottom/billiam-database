@@ -17,7 +17,7 @@ final as (
             when 1 then 'Task only'
         end as group_description,
         "task",
-        detail,
+        coalesce(detail, '') as detail,
 
         count(*) as total_records,
         sum("interval") as total_time,

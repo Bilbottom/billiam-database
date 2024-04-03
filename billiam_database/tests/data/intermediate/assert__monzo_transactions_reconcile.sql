@@ -1,8 +1,3 @@
-{#{{ config(#}
-{#    enabled=False,#}
-{#) }}#}
-
-
 {{ import(
     stg_finances = ref("stg__finances"),
     stg_monzo_transactions = ref("stg__monzo_transactions"),
@@ -16,14 +11,16 @@ my_transactions_rollup AS (
         ANY_VALUE(counterparty) AS counterparty,
         SUM(cost)::NUMERIC(18, 2) AS cost,
     FROM stg_finances
-    WHERE payment_method = 'Monzo'
-      AND item NOT IN ('Monzo Premium')
-      AND category NOT IN ('Interest')
-      AND counterparty NOT IN ('Monzo Joint', 'TfL')
-      /* Specific exceptions */
-      AND transaction_id NOT IN (
-        1132, /* 2019-07-22, £5 Joining Reward */
-      )
+    WHERE 1=1
+        AND payment_method = 'Monzo'
+        AND category != 'Interest'
+        AND counterparty NOT IN ('Monzo Joint', 'TfL')
+        /* Specific exceptions */
+        AND transaction_id NOT IN (
+            1132, /* 2019-07-22, £5 Joining Reward */
+        )
+        /* Monzo changes */
+        AND IF(transaction_date < '2023-11-17', item != 'Monzo Premium', 1=1)
     GROUP BY transaction_id
 ),
 

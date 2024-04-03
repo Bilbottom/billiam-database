@@ -117,8 +117,7 @@ models:
       - name: detail
         data_type: text
         constraints:
-          - type: check
-            expression: "(group_id = 1 OR detail IS NOT NULL)"
+          - type: not_null
         description: >
           Additional details about the task that was being worked on at the
           timestamp.
