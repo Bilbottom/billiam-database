@@ -86,5 +86,6 @@ tests:
     show: false
   billiam_database:
     +enabled: true
+    +group: billiam
     unit:
       +tags: ["unit-test"]

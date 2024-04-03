@@ -19,8 +19,6 @@ dotenv run -- dbt source freshness
 dotenv run -- dbt build --full-refresh
 
 dotenv run -- dbt test --select tag:unit-test
-dotenv run -- dbt-unit-test-coverage
-
 dotenv run -- dbt test --select data
 
 dotenv run -- dbt docs generate
