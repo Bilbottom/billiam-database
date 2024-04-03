@@ -1,4 +1,3 @@
-
 {% macro set_ci_environment() %}
     {#
     Run the required SQL to configure the database.

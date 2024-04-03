@@ -1,4 +1,3 @@
-
 {% macro create_udfs() %}
     {#
     Create the user defined functions in the target schema.
