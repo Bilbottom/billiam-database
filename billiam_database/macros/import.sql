@@ -1,4 +1,3 @@
-
 {% macro import(
     expand_columns=true,
     include_with=true,

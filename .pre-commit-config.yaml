@@ -5,7 +5,6 @@ ci:
     - poetry-lock
     - dbt-compile
     - dbt-unit-test
-    - dbt-unit-test-coverage
     - sqlfluff-lint
     - check-column-desc-are-same
     - check-script-semicolon
@@ -75,13 +74,6 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
-      - id: dbt-unit-test-coverage
-        name: Generate dbt coverage report
-        entry: dotenv run -- dbt-unit-test-coverage
-        language: system
-        pass_filenames: false
-        stages: [post-commit]
-        always_run: true
 
   # Lint and validate dbt project
   - repo: https://github.com/sqlfluff/sqlfluff
@@ -91,8 +83,8 @@ repos:
         name: Lint SQL files
         files: &model-files "^billiam_database/models/.*.sql$"
         additional_dependencies:
-          - duckdb==0.7.1
-          - dbt-duckdb==1.5.0
+          - duckdb==0.9.2
+          - dbt-duckdb==1.7.3
           - sqlfluff-templater-dbt
 
   - repo: https://github.com/dbt-checkpoint/dbt-checkpoint

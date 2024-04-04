@@ -1,7 +1,4 @@
-{{ config(
-    alias="task_details",
-    materialized="view"
-) }}
+{{ config(alias="task_details") }}
 
 
 {{ import(
