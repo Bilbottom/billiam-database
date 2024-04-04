@@ -38,7 +38,7 @@ jobs:
 
       - name: Install dbt dependencies ➕
         run: |
-          poetry run dbt clean
+          poetry run dbt clean --no-clean-project-files-only
           poetry run dbt deps
           poetry run dbt run-operation set_ci_environment
 
