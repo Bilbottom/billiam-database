@@ -8,6 +8,7 @@ package-lock.yml
 ###  Data objects
 *.db
 *.duckdb
+*.duckdb.wal
 *.csv
 *.xsl?
 
