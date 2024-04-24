@@ -100,7 +100,7 @@ models:
 
           The local timestamp isn't recorded, but it can be assumed to be GMT
           (and BST over the Summertime).
-      - name: task
+      - name: project
         data_type: varchar
         constraints:
           - type: not_null
@@ -113,7 +113,7 @@ models:
         description: >
           Additional details about the task that was being worked on at the
           timestamp.
-      - name: interval
+      - name: minutes
         data_type: integer
         constraints:
           - type: not_null
@@ -154,7 +154,7 @@ models:
         enforced: true
     constraints:
       - type: primary_key
-        columns: ["group_id", "task", "detail"]
+        columns: ["group_id", "project", "detail"]
     columns:
       - name: group_id
         data_type: integer
@@ -173,7 +173,7 @@ models:
         constraints:
           - type: not_null
         description: A description of the group ID.
-      - name: task
+      - name: project
         data_type: varchar
         constraints:
           - type: not_null

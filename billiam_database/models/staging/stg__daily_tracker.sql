@@ -14,9 +14,9 @@ final as (
     -- noqa: disable=ST06
     select
         date_time::timestamp as date_time,
-        trim("task") as "task",
+        trim("task") as project,
         coalesce(trim(detail), '') as detail,
-        "interval"::integer as "interval",
+        "interval"::integer as minutes,
         trim(company) as company
     from src_tracker
     -- noqa: enable=ST06

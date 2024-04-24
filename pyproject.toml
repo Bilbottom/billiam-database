@@ -87,10 +87,6 @@ line_position = "trailing"
 # https://docs.sqlfluff.com/en/stable/rules.html#references-bundle
 ###
 
-# https://docs.sqlfluff.com/en/stable/rules.html#rule-references.keywords
-[tool.sqlfluff.rules.references.keywords]  # RF04
-ignore_words = ["task"]
-
 # https://docs.sqlfluff.com/en/stable/rules.html#rule-references.quoting
 [tool.sqlfluff.rules.references.quoting]  # RF06
 prefer_quoted_identifiers = false

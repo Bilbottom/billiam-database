@@ -2,17 +2,15 @@
 
 
 {{ import(
-    stg_tracker = ref("stg__daily_tracker"),
-
-    expand_columns=false
+    stg_tracker = ref("stg__daily_tracker")
 ) }}
 
 final as (
     select
         date_time,
-        "task",
+        project,
         detail,
-        "interval",
+        minutes,
         company
     from stg_tracker
 )

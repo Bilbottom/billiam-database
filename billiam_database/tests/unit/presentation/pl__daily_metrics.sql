@@ -15,11 +15,11 @@
   {% endcall %}
 
   {% call dbt_unit_testing.mock_ref("stg__daily_tracker") %}
-    date_time             | task       | detail   | interval | company
-    '2018-01-01 08:15:00' | 'Meetings' | 'Task 1' | 15       | 'TSB'
-    '2018-01-01 08:30:00' | 'BAU Task' | 'Task 2' | 15       | 'Jaja'
-    '2018-01-02 08:45:00' | 'BAU Task' | 'Task 3' | 15       | 'Allica'
-    '2018-01-04 09:05:00' | 'Catch Up' | 'Task 4' | 15       | 'Sainsbury''s'
+    date_time             | project    | detail   | minutes | company
+    '2018-01-01 08:15:00' | 'Meetings' | 'Task 1' | 15      | 'TSB'
+    '2018-01-01 08:30:00' | 'BAU Task' | 'Task 2' | 15      | 'Jaja'
+    '2018-01-02 08:45:00' | 'BAU Task' | 'Task 3' | 15      | 'Allica'
+    '2018-01-04 09:05:00' | 'Catch Up' | 'Task 4' | 15      | 'Sainsbury''s'
   {% endcall %}
 
   {% call dbt_unit_testing.expect() %}
