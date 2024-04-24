@@ -1,0 +1,59 @@
+---
+version: 2
+
+seeds:
+  - name: counterparty_exclusions
+    description: >
+      Counterparties to exclude from the Monzo transactions before
+      reconciling with my own records.
+    config:
+      column_types:
+        counterparty: varchar(32)
+    columns:
+      - { name: counterparty, tests: ["not_null", "unique"] }
+  - name: work_hours
+    description: >
+      Shift patterns for each company I've worked for.
+
+      These don't account for adhoc rescheduling of hours.
+    config:
+      column_types:
+        company: varchar(32)
+        from_date: date
+        to_date: date
+        sunday: decimal(6, 4)
+        monday: decimal(6, 4)
+        tuesday: decimal(6, 4)
+        wednesday: decimal(6, 4)
+        thursday: decimal(6, 4)
+        friday: decimal(6, 4)
+        saturday: decimal(6, 4)
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: ["company", "from_date"]
+    columns:
+      - { name: company, tests: ["not_null"] }
+      - { name: from_date, tests: ["not_null"] }
+      - { name: to_date, tests: ["not_null"] }
+      - { name: sunday, tests: ["not_null"] }
+      - { name: monday, tests: ["not_null"] }
+      - { name: tuesday, tests: ["not_null"] }
+      - { name: wednesday, tests: ["not_null"] }
+      - { name: thursday, tests: ["not_null"] }
+      - { name: friday, tests: ["not_null"] }
+      - { name: saturday, tests: ["not_null"] }
+  - name: work_absences
+    description: >
+      Absences for each company I've worked for.
+
+      This isn't very reliable as I've not always recorded absences.
+      However, annual leave absences should be accurate from 2023.
+    config:
+      column_types:
+        absence_date: date
+        absence_reason: varchar(32)
+        hours: decimal(6, 4)
+    columns:
+      - { name: absence_date, tests: ["not_null", "unique"] }
+      - { name: absence_reason, tests: ["not_null"] }
+      - { name: hours, tests: ["not_null"] }

@@ -5,11 +5,14 @@ target/
 .user.yml
 package-lock.yml
 
+### Raw data and sensitive seeds
+billiam_database/models/source/
+billiam_database/seeds/counterparty_exclusions.csv
+
 ###  Data objects
 *.db
 *.duckdb
 *.duckdb.wal
-*.csv
 *.xsl?
 
 ###  IntelliJ project files
