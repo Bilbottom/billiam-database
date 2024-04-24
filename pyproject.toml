@@ -12,21 +12,7 @@ readme = "README.md"
 keywords = ["sql", "dbt", "duckdb"]
 repository = "https://github.com/Bilbottom/billiam-database"
 documentation = "https://bilbottom.github.io/billiam-database/#!/overview"
-
-# This isn't a library so there aren't any "packages" to include, but
-# `poetry install` complains that:
-#   > billiam_database is not a package.
-#
-# Poetry only supports an "application build" via its CLI by using the
-# `--no-root` flag which doesn't currently exist in the `pyproject.toml`
-# file configuration yet, see:
-#   - https://github.com/python-poetry/poetry/issues/2458
-#   - https://github.com/python-poetry/poetry/issues/1132
-#
-# Until this is supported, we'll have to just remember to include the
-# `--no-root` flag when running `poetry install`:
-#   $ poetry install --sync --no-root
-packages = []
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -36,12 +22,16 @@ duckdb = "0.9.2"
 python-dotenv = {extras = ["cli"], version = "^1.0.0"}
 
 [tool.poetry.group]
-dev.optional = false
+dev.optional = true
+ide.optional = true
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3"
 python-dotenv = {extras = ["cli"], version = "^1.0.0"}
 db-query-profiler = "^0.0.6"
+
+[tool.poetry.group.ide.dependencies]
+black = "*"
 
 
 # https://docs.sqlfluff.com/en/stable/configuration.html#default-configuration
@@ -60,13 +50,11 @@ project_dir = "billiam_database/"
 profiles_dir = "billiam_database/"
 target = "sqlfluff"
 
-
 [tool.sqlfluff.indentation]
 indented_joins = true
 indented_using_on = true
 indented_on_contents = true
 template_blocks_indent = false
-
 
 ###
 # Capitalisation bundle
@@ -81,7 +69,6 @@ capitalisation_policy = "lower"
 [tool.sqlfluff.rules.capitalisation.identifiers]  # CP02
 extended_capitalisation_policy = "lower"
 
-
 ###
 # Layout bundle
 # https://docs.sqlfluff.com/en/stable/rules.html#layout-bundle
@@ -94,7 +81,6 @@ line_position = "trailing"
 # https://docs.sqlfluff.com/en/stable/rules.html#rule-layout.commas
 [tool.sqlfluff.layout.type.comma]  # LT04
 line_position = "trailing"
-
 
 ###
 # References bundle

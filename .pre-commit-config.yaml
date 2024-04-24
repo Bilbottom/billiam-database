@@ -31,7 +31,7 @@ repos:
         name: Remove trailing whitespace
       - id: end-of-file-fixer
         name: Ensure files end with a newline character
-        exclude_types: [svg]
+        exclude_types: ["svg"]
       - id: mixed-line-ending
         name: Align mixed line ending
       - id: check-added-large-files
