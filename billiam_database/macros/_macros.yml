@@ -2,12 +2,6 @@
 version: 2
 
 macros:
-  - name: create_udfs
-    description: >
-      Create the UDFs required throughout the project (and beyond!).
-    docs:
-      show: true
-
   - name: import
     description: >
       Expand the key-value pairs into the import CTEs.
