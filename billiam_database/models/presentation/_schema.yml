@@ -82,6 +82,71 @@ models:
           The adjustment is made by taking the lesser of the total time spent
           working and 7.5 hours. This is to account for working additional hours
           on a day to not deflate the metric.
+  - name: pl__daily_tracker
+    description: '{{ doc("pl__daily_tracker") }}'
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: ["date_time"]
+    columns:
+      - name: date_time
+        data_type: timestamp
+        constraints:
+          - type: not_null
+        description: >
+          The local timestamp that the entry was recorded for.
+
+          The local timestamp isn't recorded, but it can be assumed to be GMT
+          (and BST over the Summertime).
+      - name: task
+        data_type: varchar
+        constraints:
+          - type: not_null
+        description: >
+          The task (project) that was being worked on at the timestamp.
+      - name: detail
+        data_type: varchar
+        constraints:
+          - type: not_null
+        description: >
+          Additional details about the task that was being worked on at the
+          timestamp.
+      - name: interval
+        data_type: integer
+        constraints:
+          - type: not_null
+        description: >
+          The time, in minutes, between entries.
+
+          Note that this will never be a true measure of how much time is spent
+          on a task since additional things can happen _between_ entries, and
+          the interval over which this should be correspond to is ambiguous.
+
+          That is, an interval of 15 minutes on an entry recorded at 10:00 could
+          mean any of the following:
+
+          - The entry corresponds to the last 15 minutes, 09:45 to 10:00.
+
+          - The entry corresponds to the following 15 minutes, 10:00 to 10:15.
+
+          - The entry corresponds to the surrounding 15 minutes, 09:52:30 to
+            10:07:30.
+
+          - The entry has over-stated how much time was spent on the task
+            because time was spent on other tasks before 10:00 and after 10:00.
+      - name: company
+        data_type: varchar
+        constraints:
+          - type: not_null
+          - type: check
+            expression: "company IN ('TSB', 'Jaja', 'Allica', 'Sainsbury''s')"
+        description: >
+          The employer at the time of recording.
+
+          In a future iteration of this project, this will instead be captured
+          in a seed with the from- and to- employment dates.
   - name: pl__task_details
     description: '{{ doc("pl__task_details") }}'
     config:
@@ -89,7 +154,7 @@ models:
         enforced: true
     constraints:
       - type: primary_key
-        columns: [group_id, task, detail]
+        columns: ["group_id", "task", "detail"]
     columns:
       - name: group_id
         data_type: integer
@@ -104,18 +169,18 @@ models:
 
           - `1`: Task-level aggregates.
       - name: group_description
-        data_type: text
+        data_type: varchar
         constraints:
           - type: not_null
         description: A description of the group ID.
       - name: task
-        data_type: text
+        data_type: varchar
         constraints:
           - type: not_null
         description: >
           The task (project) that was being worked on at the timestamp.
       - name: detail
-        data_type: text
+        data_type: varchar
         constraints:
           - type: not_null
         description: >

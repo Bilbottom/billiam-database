@@ -50,7 +50,7 @@ models:
     +group: billiam
 
     staging:
-      +materialized: view
+      +materialized: table
       +schema: staging
       +access: private
       +docs:

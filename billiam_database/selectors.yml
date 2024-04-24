@@ -10,3 +10,4 @@ selectors:
     definition:
       method: package
       value: billiam_database
+      exclude: ["tag:unit-test"]

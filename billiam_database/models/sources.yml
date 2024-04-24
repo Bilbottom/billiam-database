@@ -2,16 +2,6 @@
 version: 2
 
 sources:
-  - name: calendar
-    description: >
-      A set of calendar tables for date manipulation.
-
-      This should plug into:
-
-      - https://github.com/Bilbottom/sql-schema-models/tree/main/date-schema
-    database: billiam
-    schema: calendar
-    tables: []
   - name: raw
     meta:
       external_location: "billiam_database/models/source/{name}.csv"
@@ -21,13 +11,13 @@ sources:
     tables:
       - name: daily_tracker
         description: Work tracker history from 2019-04-23.
-        tags: [daily-tracker]
+        tags: ["daily-tracker"]
         loaded_at_field: date_time::TIMESTAMP
       - name: finances
         description: Item-level transaction history from 2018-01-18.
-        tags: [finances]
+        tags: ["finances"]
         loaded_at_field: '"Date"::TIMESTAMP'
       - name: monzo_transactions
         description: Monzo transaction history from 2019-07-19.
-        tags: [finances]
+        tags: ["finances"]
         loaded_at_field: '"Date"::TIMESTAMP'

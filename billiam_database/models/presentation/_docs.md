@@ -22,6 +22,22 @@ There is a row for each day from 2018-01-01 to the current day.
 
 ---
 
+## [pl\_\_daily_tracker](pl__daily_tracker.sql)
+
+{% docs pl__daily_tracker %}
+
+Work tracker history from 2019-04-23.
+
+The source of this model is my "automated" timesheet application, available at:
+
+- https://github.com/Bilbottom/daily-tracker
+
+Each row corresponds to an interval of work, which has a timestamp, details about the work, and the duration of the interval.
+
+{% enddocs %}
+
+---
+
 ## [pl\_\_task_details](pl__task_details.sql)
 
 {% docs pl__task_details %}

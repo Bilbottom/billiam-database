@@ -2,49 +2,6 @@
 version: 2
 
 models:
-  - name: int__task_details
-    description: '{{ doc("int__task_details") }}'
-    columns:
-      - name: group_id
-        data_type: integer
-        description: >
-          A generated identifier to uniquely identify groups.
-
-          The values are:
-
-          - `0`: Detail-level aggregates per task.
-
-          - `1`: Task-level aggregates.
-      - name: group_description
-        data_type: text
-        description: A description of the group ID.
-      - name: task
-        data_type: text
-        description: >
-          The task (project) that was being worked on at the timestamp.
-      - name: detail
-        data_type: text
-        description: >
-          Additional details about the task that was being worked on at the
-          timestamp.
-      - name: total_records
-        data_type: integer
-        description: >
-          The total number of events recorded for the task (or task and detail).
-      - name: total_time
-        data_type: integer
-        description: >
-          The total time, in minutes, spent on the task (or task and detail).
-      - name: start_time
-        data_type: integer
-        description:
-          The earliest timestamp than an event was recorded for the task (or
-          task and detail).
-      - name: end_time
-        data_type: integer
-        description:
-          The latest timestamp than an event was recorded for the task (or task
-          and detail).
   - name: int__transaction_items
     description: '{{ doc("int__transaction_items") }}'
     columns:
