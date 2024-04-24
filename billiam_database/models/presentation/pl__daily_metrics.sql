@@ -38,8 +38,8 @@ daily_transactions as (
 daily_work as (
     select
         date_time::date as metric_date,
-        sum("interval") as total_working_time,
-        sum("interval") filter (where "task" in ('Meetings', 'Catch Up')) as meeting_time,
+        sum(minutes) as total_working_time,
+        sum(minutes) filter (where project in ('Meetings', 'Catch Up')) as meeting_time,
         round(100.0 * meeting_time / total_working_time, 4) as meeting_proportion,
         round(100.0 * meeting_time / least(total_working_time, 7.5 * 60), 4) as working_day_meeting_proportion,
     from src_tracker

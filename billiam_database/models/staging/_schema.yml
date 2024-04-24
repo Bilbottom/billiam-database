@@ -18,7 +18,7 @@ models:
         tests:
           - unique
           - not_null
-      - name: task
+      - name: project
         data_type: text
         description: >
           The task (project) that was being worked on at the timestamp.
@@ -31,7 +31,7 @@ models:
           timestamp.
         tests:
           - not_null
-      - name: interval
+      - name: minutes
         data_type: integer
         description: >
           The time, in minutes, between entries.
