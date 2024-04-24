@@ -11,7 +11,6 @@
 ) }}
 
 final as (
-    -- noqa: disable=ST06
     select
         date_time::timestamp as date_time,
         trim("task") as project,
@@ -19,7 +18,6 @@ final as (
         "interval"::integer as minutes,
         trim(company) as company
     from src_tracker
-    -- noqa: enable=ST06
 )
 
 select * from final

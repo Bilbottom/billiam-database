@@ -8,25 +8,17 @@
 
 final as (
     select
-        row_id,
-        transaction_date,
-        transaction_id,
-        item,
-        "cost",
-        category,
-        counterparty,
-        exclusion_flag,
+        stg_finances.row_id,
+        stg_finances.transaction_date,
+        stg_finances.transaction_id,
+        stg_finances.item,
+        stg_finances."cost",
+        stg_finances.category,
+        stg_finances.counterparty,
+        stg_finances.exclusion_flag,
     from stg_finances
-    -- noqa: disable=LT02
-    where transaction_id in (
-        /*
-            Only keep the items for transactions that haven't been filtered out.
-        */
-        select transaction_id
-        from int_transactions
-    )
-    -- noqa: enable=LT02
-    order by row_id
+        semi join int_transactions using (transaction_id)
+    order by stg_finances.row_id
 )
 
 select * from final
