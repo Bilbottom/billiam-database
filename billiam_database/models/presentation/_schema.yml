@@ -244,3 +244,36 @@ models:
         description: Maximum cost of all transactions.
       - name: standard_dev_cost
         description: Standard deviation of all transactions.
+  - name: pl__working_hours
+    description: >
+      The scheduled working hours and absences per week.
+    columns:
+      - name: week_starting
+        data_type: date
+        constraints:
+          - type: not_null
+          - type: primary_key
+        description: >
+          The date of the Monday that the week starts on.
+      - name: scheduled_hours
+        data_type: decimal(6, 4)
+        constraints:
+          - type: not_null
+        description: >
+          The total hours scheduled to work for the week.
+      - name: absence_hours
+        data_type: decimal(6, 4)
+        constraints:
+          - type: not_null
+        description: >
+          The total hours of absences for the week.
+      - name: expected_working_hours
+        data_type: decimal(6, 4)
+        constraints:
+          - type: not_null
+        description: >
+          The total hours expected to work for the week.
+
+          Calculated as the scheduled hours minus the absence hours:
+
+            `scheduled_hours - absence_hours`
