@@ -7,12 +7,12 @@ require-dbt-version: [">=1.5.4", "<2.0.0"]
 
 profile: default
 
-asset-paths: [assets]
-macro-paths: [macros]
-model-paths: [models]
-seed-paths: [seeds]
-test-paths: [tests]
-clean-targets: [target, logs, dbt_packages]
+asset-paths: ["assets"]
+macro-paths: ["macros"]
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+clean-targets: ["target", "logs", "dbt_packages"]
 
 dispatch:
   - macro_namespace: dbt
@@ -37,9 +37,6 @@ seeds:
   billiam_database:
     +enabled: true
     +schema: seeds
-    counterparty_exclusions:
-      +column_types:
-        counterparty: varchar(32)
 
 models:
   billiam_database:

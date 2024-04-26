@@ -5,15 +5,10 @@
 */
 
 
--- noqa: disable=PRS
--- The `interval` column in `stg__daily_tracker` can't be parsed
 {{ import(
     src_transactions = ref("int__transaction_items"),
-    src_tracker = ref("stg__daily_tracker"),
-
-    include_recursive=true
+    src_tracker = ref("stg__daily_tracker")
 ) }}
--- noqa: enable=PRS
 
 date_dim as (
     -- noqa: disable=LT02
@@ -34,12 +29,13 @@ daily_transactions as (
     from src_transactions
     where not exclusion_flag
     group by transaction_date
-),  -- noqa: LT08
+),
+
 daily_work as (
     select
         date_time::date as metric_date,
         sum(minutes) as total_working_time,
-        sum(minutes) filter (where project in ('Meetings', 'Catch Up')) as meeting_time,
+        sum(minutes) filter (where project = 'Meetings') as meeting_time,
         round(100.0 * meeting_time / total_working_time, 4) as meeting_proportion,
         round(100.0 * meeting_time / least(total_working_time, 7.5 * 60), 4) as working_day_meeting_proportion,
     from src_tracker

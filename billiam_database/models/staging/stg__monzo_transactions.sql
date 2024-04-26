@@ -8,7 +8,7 @@
 ) }}
 
 final as (
-    -- noqa: disable=ST06, RF06
+    -- noqa: disable=RF06
     select
         "Transaction ID" as transaction_id,  -- noqa: RF05
         "Date"::date as transaction_date,
@@ -27,7 +27,7 @@ final as (
         trim("Description") as description,
         "Category split" as category_split,  -- noqa: RF05
     from src_monzo_transactions
-    -- noqa: enable=ST06, RF06
+    -- noqa: enable=RF06
 )
 
 select * from final

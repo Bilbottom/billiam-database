@@ -3,92 +3,36 @@ version: 2
 
 models:
   - name: int__transaction_items
-    description: '{{ doc("int__transaction_items") }}'
+    description: >
+      The items corresponding to each of the transactions.
+
+      Note that these are only items that have corresponding transactions in
+      `int__transactions`. Most tests can be omitted since they are tested in
+      the staging layer.
+
+      This may be decommissioned in the future as it's not really doing much.
     columns:
-      - name: row_id
-        data_type: integer
-        description: >
-          A generated identifier to uniquely identify rows.
-
-          Note that there is no concept of an 'item ID' in this model.
-      - name: transaction_date
-        data_type: date
-        description: >
-          The date of the transaction.
-
-          This will be when the transaction initiation happened in the local
-          timezone (which isn't recorded), not when the money was physically
-          moved (where there's a difference).
-      - name: transaction_id
-        data_type: integer
-        description: The transaction identifier.
-      - name: item
-        data_type: text
-        description: The name of the item.
-      - name: cost
-        data_type: decimal(18, 3)
-        description: >
-          The value, in pounds sterling (£), of the item.
-
-          A positive value represents money sent to someone else, and a negative
-          value represents money sent to me (or is a discount, etc).
-      - name: category
-        data_type: text
-        description: The category of the item.
-      - name: counterparty
-        data_type: text
-        description: >
-          The corresponding retailer for the transaction.
-
-          Note that this can also be a person (where the transaction is between
-          me and someone else), and will always be the entity that I transacted
-          with directly (so a third party will not be shown here).
-      - name: exclusion_flag
-        data_type: boolean
-        description: Whether to exclude the item from reporting.
-        tests:
-          - not_null
+      - { name: row_id, tests: ["not_null"] }
+      - { name: transaction_date, tests: ["not_null"] }
+      - { name: transaction_id, tests: ["not_null"] }
+      - { name: item, tests: ["not_null"] }
+      - { name: cost, tests: ["not_null"] }
+      - { name: category, tests: ["not_null"] }
+      - { name: counterparty, tests: ["not_null"] }
+      - { name: exclusion_flag, tests: ["not_null"] }
   - name: int__transactions
-    description: '{{ doc("int__transactions") }}'
+    description: >
+      The transactions and their core measures.
+
+      Note that these are only transactions that cause some net movement in my
+      overall balances -- for example, paying off a credit card is being
+      considered as not changing my net balance, and has been excluded.
     columns:
-      - name: transaction_id
-        data_type: integer
-        description: The transaction identifier.
-        tests:
-          - not_null
-          - unique
-      - name: transaction_date
-        data_type: integer
-        description: >
-          The date of the transaction.
-
-          This will be when the transaction initiation happened in the local
-          timezone (which isn't recorded), not when the money was physically
-          moved (where there's a difference).
-      - name: cost
-        data_type: decimal(18, 3)
-        description: >
-          The net value, in pounds sterling (£), of the transaction.
-
-          A positive value represents money sent to someone else, and a negative
-          value represents money sent to me.
-
-          This should reconcile against the values quoted in bank statements.
-        tests:
-          - not_null
-      - name: item_count
-        data_type: integer
-        description: The number of items that were included in the transaction.
-        tests:
-          - not_null
+      - { name: transaction_id, tests: ["not_null", "unique"] }
+      - { name: transaction_date }
+      - { name: cost, tests: ["not_null"] }
+      - { name: item_count, tests: ["not_null"] }
       - name: counterparty
-        data_type: text
-        description: >
-          The corresponding retailer for the transaction.
-
-          Note that this can also be a person (where the transaction is between
-          me and someone else), and will always be the entity that I transacted
-          with directly (so a third party will not be shown here).
         tests:
           - not_null
           - dbt_expectations.expect_column_values_to_not_match_like_pattern:

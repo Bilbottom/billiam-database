@@ -1,13 +1,6 @@
-{#{{ config(#}
-{#    enabled=False,#}
-{#) }}#}
-
-
 {{ import(
     stg_finances = ref("stg__finances"),
-    stg_monzo_transactions = ref("stg__monzo_transactions"),
-
-    include_recursive=true
+    stg_monzo_transactions = ref("stg__monzo_transactions")
 ) }}
 
 my_txns AS (

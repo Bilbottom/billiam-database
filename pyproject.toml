@@ -41,6 +41,7 @@ templater = "dbt"
 max_line_length = 120  # ...but try to stay under 80
 exclude_rules = [
     "LT08",  # Blank line expected but not found after CTE closing bracket
+    "ST06",  # Select wildcards then simple targets before calculations and aggregates
     "ST07",  # Prefer specifying join keys instead of using USING
     "CV03",  # Trailing comma in select statement forbidden  (this is okay in DuckDB)
 ]

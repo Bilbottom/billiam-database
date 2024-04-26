@@ -1,17 +1,12 @@
-{% macro import(
-    expand_columns=true,
-    include_with=true,
-    include_recursive=false,
-    include_final_comma=true
-) %}
-    {%- if include_with -%}WITH{%- endif %}{% if include_recursive %} RECURSIVE{%- endif %}
+{% macro import(expand_columns=true) %}
+    with recursive
 
     {%- for key, value in kwargs.items() %}
-    {{ key }} AS (
-        SELECT {{ billiam_database._parse_relation(relation=value, expand_columns=expand_columns) | indent(width=8) }}
-        FROM {{ value }}
-    ){{- "" if loop.last else "," -}}
-    {%- endfor -%}{{- "," if include_final_comma else "" -}}
+    {{ key }} as (
+        select {{ billiam_database._parse_relation(relation=value, expand_columns=expand_columns) | indent(width=8) }}
+        from {{ value }}
+    ),
+    {%- endfor -%}
 {% endmacro %}
 
 
