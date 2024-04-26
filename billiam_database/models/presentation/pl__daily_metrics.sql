@@ -7,9 +7,7 @@
 
 {{ import(
     src_transactions = ref("int__transaction_items"),
-    src_tracker = ref("stg__daily_tracker"),
-
-    include_recursive=true
+    src_tracker = ref("stg__daily_tracker")
 ) }}
 
 date_dim as (

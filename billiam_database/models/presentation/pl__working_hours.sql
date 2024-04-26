@@ -3,9 +3,7 @@
 
 {{ import(
     seeds_work_hours = ref("work_hours"),
-    seeds_work_absences = ref("work_absences"),
-
-    include_recursive=true
+    seeds_work_absences = ref("work_absences")
 ) }}
 
 dates (week_starting) as (
