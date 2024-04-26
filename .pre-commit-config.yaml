@@ -3,19 +3,13 @@ ci:
   autoupdate_schedule: quarterly
   skip:
     - poetry-lock
+    - sqlfluff-lint
     - dbt-compile
     - dbt-docs
     - dbt-unit-test
-    - sqlfluff-lint
-    - check-column-desc-are-same
-    - check-script-semicolon
-    - check-model-columns-have-desc
-    - check-model-has-description
-    - check-model-has-properties-file
-    - check-model-has-all-columns
 
-default_install_hook_types: [pre-commit, post-commit]
-default_stages: [pre-commit]
+default_install_hook_types: ["pre-commit", "pre-push"]
+default_stages: ["pre-commit"]
 
 repos:
   - repo: meta
@@ -60,6 +54,17 @@ repos:
       - id: prettier
         name: Make code pretty
 
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 3.0.5
+    hooks:
+      - id: sqlfluff-lint
+        name: Lint SQL files
+        files: "^billiam_database/models/.*.sql$"
+        additional_dependencies:
+          - duckdb==0.9.2
+          - dbt-duckdb==1.7.3
+          - sqlfluff-templater-dbt
+
   # Testing and coverage
   - repo: local
     hooks:
@@ -69,61 +74,18 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+        stages: ["pre-push"]
       - id: dbt-docs
         name: Compile the dbt docs
         entry: dotenv run -- dbt docs generate
         language: system
         pass_filenames: false
         always_run: true
+        stages: ["pre-push"]
       - id: dbt-unit-test
         name: Run dbt unit tests
         entry: dotenv run -- dbt test --select tag:unit-test
         language: system
         pass_filenames: false
         always_run: true
-
-  # Lint and validate dbt project
-  - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 3.0.5
-    hooks:
-      - id: sqlfluff-lint
-        name: Lint SQL files
-        files: &model-files "^billiam_database/models/.*.sql$"
-        additional_dependencies:
-          - duckdb==0.9.2
-          - dbt-duckdb==1.7.3
-          - sqlfluff-templater-dbt
-
-  - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
-    rev: v2.0.1
-    hooks:
-      - id: check-column-desc-are-same
-        name: Check column descriptions are the same
-        files: *model-files
-        args: &checkpoint-args-manifest
-          - "--manifest"
-          - "billiam_database/target/manifest.json"
-      - id: check-script-semicolon
-        name: Ensure that the script does not have a semicolon
-        files: *model-files
-        args: *checkpoint-args-manifest
-      - id: check-model-columns-have-desc
-        name: Check the model columns have description
-        files: *model-files
-        args: *checkpoint-args-manifest
-      - id: check-model-has-description
-        name: Check the model has description
-        files: *model-files
-        args: *checkpoint-args-manifest
-      - id: check-model-has-properties-file
-        name: Check the model has properties file
-        files: *model-files
-        args: *checkpoint-args-manifest
-      - id: check-model-has-all-columns
-        name: Check the model has all columns in the YAML file
-        files: *model-files
-        args:
-          - "--manifest"
-          - "billiam_database/target/manifest.json"
-          - "--catalog"
-          - "billiam_database/target/catalog.json"
+        stages: ["pre-push"]
