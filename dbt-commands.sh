@@ -14,6 +14,9 @@ dotenv run -- dbt debug
 dotenv run -- dbt clean --no-clean-project-files-only
 dotenv run -- dbt deps
 
+dotenv run -- dbt parse
+dotenv run -- dbt compile
+
 # TODO: A top-level `dbt_packages` directory is being created. Stop this from happening
 dotenv run -- dbt source freshness
 dotenv run -- dbt build --full-refresh
