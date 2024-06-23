@@ -1,0 +1,20 @@
+# Currently disabled as the test doesn't work on non-database objects
+#
+#unit_tests:
+#  - name: test__stg__daily_tracker
+#    model: stg__daily_tracker
+#    given:
+#      - input: source("raw", "daily_tracker")
+#        rows:
+#          # prettier-ignore
+#          - {date_time: "2019-04-23 08:15:00", task: "BAU Task     ", detail: "Running Unsecured Master Code  ", interval: 15, company: TSB}
+#          - {date_time: "2019-04-23 08:30:00", task: "Adhoc Task   ", detail: "Working on this workbook       ", interval: 15, company: TSB}
+#          - {date_time: "2019-04-23 08:45:00", task: "Documentation", detail: "Weekly Wellness Procedure Guide", interval: 15, company: TSB}
+#          - {date_time: "2019-04-23 09:00:00", task: "Something    ", detail: "Weekly Wellness                ", interval: 15, company: TSB}
+#    expect:
+#      rows:
+#        # prettier-ignore
+#        - {date_time: "2019-04-23 08:15:00", task: "BAU Task",      detail: "Running Unsecured Master Code",   interval: 15, company: TSB}
+#        - {date_time: "2019-04-23 08:30:00", task: "Adhoc Task",    detail: "Working on this workbook",        interval: 15, company: TSB}
+#        - {date_time: "2019-04-23 08:45:00", task: "Documentation", detail: "Weekly Wellness Procedure Guide", interval: 15, company: TSB}
+#        - {date_time: "2019-04-23 09:00:00", task: "Something",     detail: "Weekly Wellness",                 interval: 15, company: TSB}

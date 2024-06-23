@@ -15,21 +15,21 @@ models:
 
           The local timestamp isn't recorded, but it can be assumed to be GMT
           (and BST over the Summertime).
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: project
         data_type: text
         description: >
           The task (project) that was being worked on at the timestamp.
-        tests:
+        data_tests:
           - not_null
       - name: detail
         data_type: text
         description: >
           Additional details about the task that was being worked on at the
           timestamp.
-        tests:
+        data_tests:
           - not_null
       - name: minutes
         data_type: integer
@@ -52,7 +52,7 @@ models:
 
           - The entry has over-stated how much time was spent on the task
             because time was spent on other tasks before 10:00 and after 10:00.
-        tests:
+        data_tests:
           - not_null
       - name: company
         data_type: text
@@ -61,7 +61,7 @@ models:
 
           In a future iteration of this project, this will instead be captured
           in a seed with the from- and to- employment dates.
-        tests:
+        data_tests:
           - not_null
           - accepted_values:
               values: ["TSB", "Jaja", "Allica", "Sainsbury''s"]
@@ -72,13 +72,13 @@ models:
       - name: row_id
         data_type: integer
         description: A generated identifier to uniquely identify rows.
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: transaction_id
         data_type: integer
         description: The transaction identifier.
-        tests:
+        data_tests:
           - not_null
       - name: transaction_date
         data_type: date
@@ -88,12 +88,12 @@ models:
           This will be when the transaction initiation happened in the local
           timezone (which isn't recorded), not when the money was physically
           moved (where there's a difference).
-        tests:
+        data_tests:
           - not_null
       - name: item
         data_type: text
         description: The name of the item.
-        tests:
+        data_tests:
           - not_null
       - name: cost
         data_type: decimal(18, 3)
@@ -102,12 +102,12 @@ models:
 
           A positive value represents money sent to someone else, and a negative
           value represents money sent to me (or is a discount, etc).
-        tests:
+        data_tests:
           - not_null
       - name: category
         data_type: text
         description: The category of the item.
-        tests:
+        data_tests:
           - not_null
       - name: counterparty
         data_type: text
@@ -117,22 +117,22 @@ models:
           Note that this can also be a person (where the transaction is between
           me and someone else), and will always be the entity that I transacted
           with directly (so a third party will not be shown here).
-        tests:
+        data_tests:
           - not_null
       - name: payment_method
         data_type: text
         description: The method used to pay for the transaction.
-        tests:
+        data_tests:
           - not_null
       - name: exclusion_flag
         data_type: boolean
         description: Whether to exclude the item from reporting.
-        tests:
+        data_tests:
           - not_null
       - name: reimbursement_transaction_id
         data_type: integer
         description: The transaction ID of the transaction that this repays.
-        tests:
+        data_tests:
           - relationships:
               to: ref("stg__finances")
               field: transaction_id
@@ -145,18 +145,18 @@ models:
       - name: transaction_id
         data_type: text
         description: The unique identifier for each transaction.
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: transaction_date
         data_type: date
         description: The date of the transaction.
-        tests:
+        data_tests:
           - not_null
       - name: transaction_time
         data_type: time
         description: The time of the transaction.
-        tests:
+        data_tests:
           - not_null
       - name: type
         data_type: text
@@ -166,7 +166,7 @@ models:
           This is typically to distinguish between transaction methods, such as
           internal transfers (`Pot transfer`) and payment schemes like faster
           payments (`Faster payment`).
-        tests:
+        data_tests:
           - not_null
       - name: counterparty
         data_type: text

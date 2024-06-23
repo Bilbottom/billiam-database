@@ -1,0 +1,18 @@
+# Currently disabled as the test doesn't work on non-database objects
+#
+#unit_tests:
+#  - name: test__stg__monzo_transactions
+#    model: stg__monzo_transactions
+#    given:
+#      - input: source("raw", "monzo_transactions")
+#        rows:
+#          # prettier-ignore
+#          - {"Transaction ID": "tx_0123456789abcdefghijkl", "Date": "2019-07-19", "Time": "18:29:44", "Type": "Payment",    "Name": "Billiam", "Emoji": , "Category": "Home",     "Amount":   10.00, "Currency": "GBP", "Local amount":   10.00, "Local currency": "GBP", "Notes and #tags": "MONZO", "Address": , "Receipt": , "Description": "MONZO", "Category split": }
+#          - {"Transaction ID": "tx_0123456789mnopqrstuvwx", "Date": "2019-07-20", "Time": "13:37:41", "Type": "Withdrawal", "Name": "Cortana", "Emoji": , "Category": "General" , "Amount":  100.00, "Currency": "GBP", "Local amount":  100.00, "Local currency": "GBP", "Notes and #tags": "Monzo", "Address": , "Receipt": , "Description": "Monzo", "Category split": }
+#          - {"Transaction ID": "tx_0123456789yzABCDEFGHIJ", "Date": "2019-07-20", "Time": "13:45:40", "Type": "Something",  "Name": "Gandalf", "Emoji": , "Category": "Transfer", "Amount": 1000.00, "Currency": "GBP", "Local amount": 1000.00, "Local currency": "GBP", "Notes and #tags": "Monzo", "Address": , "Receipt": , "Description": "Monzo", "Category split": }
+#    expect:
+#      rows:
+#        # prettier-ignore
+#        - {transaction_id: "tx_0123456789abcdefghijkl", transaction_date: "2019-07-19", transaction_time: "18:29:44", type: "Payment",    counterparty: "Billiam", emoji: , category: "Home",     cost:   10.00, currency: "GBP", local_cost:   10.00, local_currency: "GBP", notes: "MONZO", address: , receipt: , description: "MONZO", category_split: }
+#        - {transaction_id: "tx_0123456789mnopqrstuvwx", transaction_date: "2019-07-20", transaction_time: "13:37:41", type: "Withdrawal", counterparty: "Cortana", emoji: , category: "General" , cost:  100.00, currency: "GBP", local_cost:  100.00, local_currency: "GBP", notes: "Monzo", address: , receipt: , description: "Monzo", category_split: }
+#        - {transaction_id: "tx_0123456789yzABCDEFGHIJ", transaction_date: "2019-07-20", transaction_time: "13:45:40", type: "Something",  counterparty: "Gandalf", emoji: , category: "Transfer", cost: 1000.00, currency: "GBP", local_cost: 1000.00, local_currency: "GBP", notes: "Monzo", address: , receipt: , description: "Monzo", category_split: }

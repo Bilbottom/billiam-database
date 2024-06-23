@@ -1,0 +1,20 @@
+# Currently disabled as the test doesn't work on non-database objects
+#
+#unit_tests:
+#  - name: test__stg__finances
+#    model: stg__finances
+#    given:
+#      - input: source("raw", "finances")
+#        rows:
+#          # prettier-ignore
+#          - {"Transaction": 1, "Date": "2018-01-18", Item: "Cheese  ", Cost: "£5.24",    Category: "   Food ", Retailer: "Tesco  ", "Payment Method": "Santander", Exclusion: 0, "Repayment Identifier": , "Reimbursement Transaction": , "Expenditure Identifier": "Expenditure", "Regular Spending": 0, "Small Transaction": 1, "Week Ending": "20/01/2018", Month: "01/01/2018", "Pay Date": "00/01/1900", "Overall Category": "Food        ", "Item Roundup": 9.04, "Transaction Roundup": 8.44}
+#          - {"Transaction": 1, "Date": "2018-01-18", Item: "Chillies", Cost: "£0.90",    Category: "   Food ", Retailer: "Tesco  ", "Payment Method": "Santander", Exclusion: 0, "Repayment Identifier": , "Reimbursement Transaction": , "Expenditure Identifier": "Expenditure", "Regular Spending": 0, "Small Transaction": 1, "Week Ending": "20/01/2018", Month: "01/01/2018", "Pay Date": "00/01/1900", "Overall Category": "Food        ", "Item Roundup":  1.4, "Transaction Roundup": 8.44}
+#          - {"Transaction": 1, "Date": "2018-01-18", Item: "Lettuce ", Cost: "£1000.50", Category: "Food ",    Retailer: "Tesco  ", "Payment Method": "Santander", Exclusion: 0, "Repayment Identifier": , "Reimbursement Transaction": , "Expenditure Identifier": "Expenditure", "Regular Spending": 0, "Small Transaction": 1, "Week Ending": "20/01/2018", Month: "01/01/2018", "Pay Date": "00/01/1900", "Overall Category": "Food        ", "Item Roundup":    3, "Transaction Roundup": 8.44}
+#          - {"Transaction": 2, "Date": "2018-01-18", Item: "Internet", Cost: "-£10.00",  Category: " Bills",   Retailer: "Someone", "Payment Method": "Cash     ", Exclusion: 1, "Repayment Identifier": , "Reimbursement Transaction": , "Expenditure Identifier": "Income     ", "Regular Spending": 0, "Small Transaction": 1, "Week Ending": "20/01/2018", Month: "01/01/2018", "Pay Date": "00/01/1900", "Overall Category": "Living Costs", "Item Roundup":    0, "Transaction Roundup": 0}
+#    expect:
+#      rows:
+#        # prettier-ignore
+#        - {row_id: 1, transaction_id: 1, transaction_date: "2018-01-18", item: "Cheese",   cost:    5.24, category: "Food",  counterparty: "Tesco",   payment_method: "Santander", exclusion_flag: false, reimbursement_transaction_id: }
+#        - {row_id: 2, transaction_id: 1, transaction_date: "2018-01-18", item: "Chillies", cost:    0.90, category: "Food",  counterparty: "Tesco",   payment_method: "Santander", exclusion_flag: false, reimbursement_transaction_id: }
+#        - {row_id: 3, transaction_id: 1, transaction_date: "2018-01-18", item: "Lettuce",  cost: 1000.50, category: "Food",  counterparty: "Tesco",   payment_method: "Santander", exclusion_flag: false, reimbursement_transaction_id: }
+#        - {row_id: 4, transaction_id: 2, transaction_date: "2018-01-18", item: "Internet", cost:  -10.00, category: "Bills", counterparty: "Someone", payment_method: "Cash",      exclusion_flag: true,  reimbursement_transaction_id: }

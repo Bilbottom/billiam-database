@@ -16,13 +16,11 @@ dotenv run -- dbt deps
 
 dotenv run -- dbt parse
 dotenv run -- dbt compile
+dotenv run -- dbt test --select test_type:unit
 
-# TODO: A top-level `dbt_packages` directory is being created. Stop this from happening
 dotenv run -- dbt source freshness
 dotenv run -- dbt build --full-refresh
-
-dotenv run -- dbt test --select tag:unit-test
-dotenv run -- dbt test --select data
+dotenv run -- dbt test --select test_type:data
 
 dotenv run -- dbt docs generate
 dotenv run -- dbt docs serve --port=8085
