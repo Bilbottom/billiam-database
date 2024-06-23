@@ -10,7 +10,7 @@ seeds:
       column_types:
         counterparty: varchar(32)
     columns:
-      - { name: counterparty, tests: ["not_null", "unique"] }
+      - { name: counterparty, data_tests: ["not_null", "unique"] }
   - name: work_hours
     description: >
       Shift patterns for each company I've worked for.
@@ -28,20 +28,20 @@ seeds:
         thursday: decimal(6, 4)
         friday: decimal(6, 4)
         saturday: decimal(6, 4)
-    tests:
+    data_tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns: ["company", "from_date"]
     columns:
-      - { name: company, tests: ["not_null"] }
-      - { name: from_date, tests: ["not_null"] }
-      - { name: to_date, tests: ["not_null"] }
-      - { name: sunday, tests: ["not_null"] }
-      - { name: monday, tests: ["not_null"] }
-      - { name: tuesday, tests: ["not_null"] }
-      - { name: wednesday, tests: ["not_null"] }
-      - { name: thursday, tests: ["not_null"] }
-      - { name: friday, tests: ["not_null"] }
-      - { name: saturday, tests: ["not_null"] }
+      - { name: company, data_tests: ["not_null"] }
+      - { name: from_date, data_tests: ["not_null"] }
+      - { name: to_date, data_tests: ["not_null"] }
+      - { name: sunday, data_tests: ["not_null"] }
+      - { name: monday, data_tests: ["not_null"] }
+      - { name: tuesday, data_tests: ["not_null"] }
+      - { name: wednesday, data_tests: ["not_null"] }
+      - { name: thursday, data_tests: ["not_null"] }
+      - { name: friday, data_tests: ["not_null"] }
+      - { name: saturday, data_tests: ["not_null"] }
   - name: work_absences
     description: >
       Absences for each company I've worked for.
@@ -54,6 +54,6 @@ seeds:
         absence_reason: varchar(32)
         hours: decimal(6, 4)
     columns:
-      - { name: absence_date, tests: ["not_null", "unique"] }
-      - { name: absence_reason, tests: ["not_null"] }
-      - { name: hours, tests: ["not_null"] }
+      - { name: absence_date, data_tests: ["not_null", "unique"] }
+      - { name: absence_reason, data_tests: ["not_null"] }
+      - { name: hours, data_tests: ["not_null"] }

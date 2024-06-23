@@ -33,6 +33,11 @@ on-run-start:
 on-run-end:
   - "{% if target.name == 'prod' %}DROP SCHEMA IF EXISTS dbt_test__audit CASCADE;{% endif %}"
 
+flags:
+  require_explicit_package_overrides_for_builtin_materializations: true
+  require_model_names_without_spaces: true
+  source_freshness_run_project_hooks: false
+
 seeds:
   billiam_database:
     +enabled: true
@@ -76,13 +81,11 @@ models:
 #    +docs:
 #      show: false
 
-# https://docs.getdbt.com/reference/test-configs
-tests:
+# https://docs.getdbt.com/reference/data-test-configs
+data_tests:
   +docs:
     node_color: Indigo
     show: false
   billiam_database:
     +enabled: true
     +group: billiam
-    unit:
-      +tags: ["unit-test"]

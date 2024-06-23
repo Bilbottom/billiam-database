@@ -1,0 +1,20 @@
+---
+unit_tests:
+  - name: test__pl__task_details
+    model: pl__task_details
+    given:
+      - input: ref("stg__daily_tracker")
+        rows:
+          # prettier-ignore
+          - {date_time: "2019-04-23 08:15:00", project: "BAU Task", detail: "Task 1", minutes: 15, company: "TSB"}
+          - {date_time: "2019-04-23 08:30:00", project: "BAU Task", detail: "Task 2", minutes: 15, company: "Jaja"}
+          - {date_time: "2019-04-23 08:45:00", project: "BAU Task", detail: "Task 3", minutes: 15, company: "Allica"}
+          - {date_time: "2019-04-23 09:00:00", project: "BAU Task", detail: "Task 4", minutes: 15, company: "Sainsbury's"}
+    expect:
+      rows:
+        # prettier-ignore
+        - {group_id: 0, group_description: "Task and detail", project: "BAU Task", detail: "Task 1", total_records: 1, total_time: 15}
+        - {group_id: 0, group_description: "Task and detail", project: "BAU Task", detail: "Task 2", total_records: 1, total_time: 15}
+        - {group_id: 0, group_description: "Task and detail", project: "BAU Task", detail: "Task 3", total_records: 1, total_time: 15}
+        - {group_id: 0, group_description: "Task and detail", project: "BAU Task", detail: "Task 4", total_records: 1, total_time: 15}
+        - {group_id: 1, group_description: "Task only",       project: "BAU Task", detail: "",       total_records: 4, total_time: 60}

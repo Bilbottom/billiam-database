@@ -1,0 +1,14 @@
+---
+unit_tests:
+  - name: test__int__transactions
+    model: int__transactions
+    given:
+      - input: ref("stg__finances")
+        rows:
+          # prettier-ignore
+          - {row_id: 1, transaction_id: 1, transaction_date: "2020-01-01", item: "Item 1", cost: 2.99, category: "Food", counterparty: "Tesco", payment_method: , exclusion_flag: , reimbursement_transaction_id: }
+          - {row_id: 2, transaction_id: 1, transaction_date: "2020-01-01", item: "Item 2", cost: 3.99, category: "Food", counterparty: "Tesco", payment_method: , exclusion_flag: , reimbursement_transaction_id: }
+    expect:
+      rows:
+        # prettier-ignore
+        - {transaction_id: 1, transaction_date: "2020-01-01", cost: 6.98, item_count: 2, counterparty: "Tesco"}

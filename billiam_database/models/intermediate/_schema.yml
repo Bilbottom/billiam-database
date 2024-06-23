@@ -12,14 +12,14 @@ models:
 
       This may be decommissioned in the future as it's not really doing much.
     columns:
-      - { name: row_id, tests: ["not_null"] }
-      - { name: transaction_date, tests: ["not_null"] }
-      - { name: transaction_id, tests: ["not_null"] }
-      - { name: item, tests: ["not_null"] }
-      - { name: cost, tests: ["not_null"] }
-      - { name: category, tests: ["not_null"] }
-      - { name: counterparty, tests: ["not_null"] }
-      - { name: exclusion_flag, tests: ["not_null"] }
+      - { name: row_id, data_tests: ["not_null"] }
+      - { name: transaction_date, data_tests: ["not_null"] }
+      - { name: transaction_id, data_tests: ["not_null"] }
+      - { name: item, data_tests: ["not_null"] }
+      - { name: cost, data_tests: ["not_null"] }
+      - { name: category, data_tests: ["not_null"] }
+      - { name: counterparty, data_tests: ["not_null"] }
+      - { name: exclusion_flag, data_tests: ["not_null"] }
   - name: int__transactions
     description: >
       The transactions and their core measures.
@@ -28,12 +28,12 @@ models:
       overall balances -- for example, paying off a credit card is being
       considered as not changing my net balance, and has been excluded.
     columns:
-      - { name: transaction_id, tests: ["not_null", "unique"] }
+      - { name: transaction_id, data_tests: ["not_null", "unique"] }
       - { name: transaction_date }
-      - { name: cost, tests: ["not_null"] }
-      - { name: item_count, tests: ["not_null"] }
+      - { name: cost, data_tests: ["not_null"] }
+      - { name: item_count, data_tests: ["not_null"] }
       - name: counterparty
-        tests:
+        data_tests:
           - not_null
           - dbt_expectations.expect_column_values_to_not_match_like_pattern:
               like_pattern: "%||%"
