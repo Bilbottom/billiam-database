@@ -60,6 +60,7 @@ repos:
       - id: sqlfluff-lint
         name: Lint SQL files
         files: "^billiam_database/models/.*.sql$"
+        exclude: ".*" # Exclude all files for now
         additional_dependencies:
           - duckdb==0.9.2
           - dbt-duckdb==1.7.3

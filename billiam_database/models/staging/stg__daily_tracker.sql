@@ -16,7 +16,6 @@ final as (
         trim("task") as project,
         coalesce(trim(detail), '') as detail,
         "interval"::integer as minutes,
-        trim(company) as company
     from src_tracker
 )
 

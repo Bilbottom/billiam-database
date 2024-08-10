@@ -136,17 +136,6 @@ models:
 
           - The entry has over-stated how much time was spent on the task
             because time was spent on other tasks before 10:00 and after 10:00.
-      - name: company
-        data_type: varchar
-        constraints:
-          - type: not_null
-          - type: check
-            expression: "company IN ('TSB', 'Jaja', 'Allica', 'Sainsbury''s')"
-        description: >
-          The employer at the time of recording.
-
-          In a future iteration of this project, this will instead be captured
-          in a seed with the from- and to- employment dates.
   - name: pl__task_details
     description: '{{ doc("pl__task_details") }}'
     config:
