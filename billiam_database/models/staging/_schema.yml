@@ -54,17 +54,6 @@ models:
             because time was spent on other tasks before 10:00 and after 10:00.
         data_tests:
           - not_null
-      - name: company
-        data_type: text
-        description: >
-          The employer at the time of recording.
-
-          In a future iteration of this project, this will instead be captured
-          in a seed with the from- and to- employment dates.
-        data_tests:
-          - not_null
-          - accepted_values:
-              values: ["TSB", "Jaja", "Allica", "Sainsbury''s"]
 
   - name: stg__finances
     description: '{{ doc("stg__finances") }}'

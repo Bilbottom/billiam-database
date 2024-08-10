@@ -11,7 +11,6 @@ final as (
         project,
         detail,
         minutes,
-        company
     from stg_tracker
 )
 
