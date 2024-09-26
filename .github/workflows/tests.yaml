@@ -2,11 +2,9 @@
 name: Tests
 run-name: Run project tests
 
-on: ["pull_request", "workflow_dispatch"]
-
-env:
-  DBT_PROJECT_DIR: ${{ vars.DBT_PROJECT_DIR }}
-  DBT_PROFILES_DIR: ${{ vars.DBT_PROFILES_DIR }}
+on:
+  - workflow_dispatch
+#  - pull_request
 
 concurrency:
   group: ${{ github.ref }}
@@ -27,22 +25,13 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dbt ⬇️
-        run: poetry install
+      - name: Install dependencies ⬇️
+        run: poetry install --without dev
 
       - name: Create mock database 🤡
         run: >
           poetry run python -c
           "import duckdb; con = duckdb.connect('$GITHUB_WORKSPACE/billiam_database/billiam.duckdb'); con.close()"
 
-      - name: Install dbt dependencies ➕
-        run: |
-          poetry run dbt clean --no-clean-project-files-only
-          poetry run dbt deps
-          poetry run dbt run-operation set_ci_environment
-
-      - name: Parse dbt 🗃️
-        run: poetry run dbt parse
-
-      - name: Run dbt unit tests 🧪
-        run: poetry run dbt test --select tag:unit-test
+      - name: Run unit tests 🧪
+        run: poetry run sqlmesh -p billiam_database test

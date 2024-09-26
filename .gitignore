@@ -1,13 +1,9 @@
-###  dbt artifacts
+###  SQLMesh artifacts
 logs/
-dbt_packages/
-target/
-.user.yml
-package-lock.yml
 
 ### Raw data and sensitive seeds
-billiam_database/models/source/
-billiam_database/seeds/counterparty_exclusions.csv
+billiam_database/models/raw/data/
+billiam_database/models/seeds/data/counterparty_exclusions.csv
 
 ###  Data objects
 *.db

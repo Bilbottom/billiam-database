@@ -1,0 +1,27 @@
+---
+test__presentation__daily_metrics:
+  model: presentation.daily_metrics
+  inputs:
+    raw.daily_tracker:
+      # prettier-ignore
+      - {date_time: "2018-01-01 08:15:00", project: "BAU Task", detail: "Task 1",    minutes: 15}
+      - {date_time: "2018-01-01 08:30:00", project: "BAU Task", detail: "Task 2",    minutes: 15}
+      - {date_time: "2018-01-02 08:45:00", project: "BAU Task", detail: "Task 3",    minutes: 15}
+      - {date_time: "2018-01-02 09:00:00", project: "Meetings", detail: "Something", minutes: 15}
+    intermediate.transaction_items:
+      # prettier-ignore
+      - {row_id: 1, transaction_id: 1, transaction_date: "2018-01-01", item: "Item 1", cost: 2.99, category: "Food", counterparty: "Tesco",    exclusion_flag: false}
+      - {row_id: 2, transaction_id: 1, transaction_date: "2018-01-01", item: "Item 2", cost: 3.99, category: "Rent", counterparty: "Landlord", exclusion_flag: false}
+      - {row_id: 3, transaction_id: 2, transaction_date: "2018-01-02", item: "Item 3", cost: 4.99, category: "Food", counterparty: "Tesco",    exclusion_flag: false}
+      - {row_id: 4, transaction_id: 3, transaction_date: "2018-01-03", item: "Item 4", cost: 5.99, category: "Food", counterparty: "Tesco",    exclusion_flag: true}
+      - {row_id: 5, transaction_id: 4, transaction_date: "2018-01-04", item: "Item 5", cost: 6.99, category: "Rent", counterparty: "Landlord", exclusion_flag: false}
+  outputs:
+    query:
+      # prettier-ignore
+      - {metric_date: "2018-01-01", total_cost: 6.98, non_essential_cost: 2.99, non_essential_cost_proportion: 42.8367, total_working_time: 30, meeting_time:  0, meeting_proportion:  0.0, working_day_meeting_proportion:  0.0}
+      - {metric_date: "2018-01-02", total_cost: 4.99, non_essential_cost: 4.99, non_essential_cost_proportion:   100.0, total_working_time: 30, meeting_time: 15, meeting_proportion: 50.0, working_day_meeting_proportion: 50.0}
+      - {metric_date: "2018-01-03", total_cost: 0.00, non_essential_cost: 0.00, non_essential_cost_proportion:     0.0, total_working_time:  0, meeting_time:  0, meeting_proportion:  0.0, working_day_meeting_proportion:  0.0}
+      - {metric_date: "2018-01-04", total_cost: 6.99, non_essential_cost: 0.00, non_essential_cost_proportion:   100.0, total_working_time:  0, meeting_time:  0, meeting_proportion:  0.0, working_day_meeting_proportion:  0.0}
+      - {metric_date: "2018-01-05", total_cost: 0.00, non_essential_cost: 0.00, non_essential_cost_proportion:     0.0, total_working_time:  0, meeting_time:  0, meeting_proportion:  0.0, working_day_meeting_proportion:  0.0}
+  vars:
+    execution_time: "2018-01-05 00:00:00"

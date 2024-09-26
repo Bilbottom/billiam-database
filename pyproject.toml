@@ -6,37 +6,32 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "billiam-database"
 version = "0.0.0"
-description = "OLAP database project for life admin (feat. dbt)."
+description = "OLAP database project for life admin."
 authors = ["Bilbottom"]
 readme = "README.md"
-keywords = ["sql", "dbt", "duckdb"]
+keywords = ["sql", "sqlmesh", "duckdb"]
 repository = "https://github.com/Bilbottom/billiam-database"
 documentation = "https://bilbottom.github.io/billiam-database/#!/overview"
 package-mode = false
 
 [tool.poetry.dependencies]
 python = "~3.11"
-dbt-core = "~1.8"
-dbt-duckdb = "~1.8"
-duckdb = "1.0.0"
+duckdb = "^1"
 python-dotenv = {extras = ["cli"], version = "^1"}
+sqlmesh = "0.139.0"  # pinned because of https://github.com/TobikoData/sqlmesh/issues/3555
 
 [tool.poetry.group]
-dev.optional = true
-ide.optional = true
+dev.optional = false
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^3"
 db-query-profiler = "^0.0.6"
-
-[tool.poetry.group.ide.dependencies]
-black = "*"
+pre-commit = "^3"
+sqlmesh = {extras = ["web"], version = "*"}
 
 
 # https://docs.sqlfluff.com/en/stable/configuration.html#default-configuration
 [tool.sqlfluff.core]
 dialect = "duckdb"
-templater = "dbt"
 max_line_length = 120  # ...but try to stay under 80
 exclude_rules = [
     "LT08",  # Blank line expected but not found after CTE closing bracket
@@ -44,11 +39,6 @@ exclude_rules = [
     "ST07",  # Prefer specifying join keys instead of using USING
     "CV03",  # Trailing comma in select statement forbidden  (this is okay in DuckDB)
 ]
-
-[tool.sqlfluff.templater.dbt]
-project_dir = "billiam_database/"
-profiles_dir = "billiam_database/"
-target = "sqlfluff"
 
 [tool.sqlfluff.indentation]
 indented_joins = true

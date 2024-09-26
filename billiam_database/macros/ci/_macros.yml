@@ -1,9 +1,0 @@
----
-version: 2
-
-macros:
-  - name: set_ci_environment
-    description: >
-      Configure the CI environment (mainly environment variables).
-    docs:
-      show: true
