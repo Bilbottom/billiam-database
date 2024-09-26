@@ -4,9 +4,6 @@ ci:
   skip:
     - poetry-lock
     - sqlfluff-lint
-    - dbt-compile
-    - dbt-docs
-    - dbt-unit-test
 
 default_install_hook_types: ["pre-commit", "pre-push"]
 default_stages: ["pre-commit"]
@@ -61,32 +58,3 @@ repos:
         name: Lint SQL files
         files: "^billiam_database/models/.*.sql$"
         exclude: ".*" # Exclude all files for now
-        additional_dependencies:
-          - duckdb==0.9.2
-          - dbt-duckdb==1.7.3
-          - sqlfluff-templater-dbt
-
-  # Testing and coverage
-  - repo: local
-    hooks:
-      - id: dbt-compile
-        name: Compile the dbt project
-        entry: dotenv run -- dbt compile
-        language: system
-        pass_filenames: false
-        always_run: true
-        stages: ["pre-push"]
-      - id: dbt-docs
-        name: Compile the dbt docs
-        entry: dotenv run -- dbt docs generate
-        language: system
-        pass_filenames: false
-        always_run: true
-        stages: ["pre-push"]
-      - id: dbt-unit-test
-        name: Run dbt unit tests
-        entry: dotenv run -- dbt test --select tag:unit-test
-        language: system
-        pass_filenames: false
-        always_run: true
-        stages: ["pre-push"]

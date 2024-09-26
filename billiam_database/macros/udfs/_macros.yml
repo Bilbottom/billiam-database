@@ -1,9 +1,0 @@
----
-version: 2
-
-macros:
-  - name: create_udfs
-    description: >
-      Create the UDFs required throughout the project (and beyond!).
-    docs:
-      show: true
