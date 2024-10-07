@@ -17,7 +17,7 @@ repos:
       - id: identity
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: no-commit-to-branch
         name: Don't allow commits to the main branch
@@ -55,7 +55,7 @@ repos:
         name: Make code pretty
 
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 3.0.7
+    rev: 3.2.2
     hooks:
       - id: sqlfluff-lint
         name: Lint SQL files
