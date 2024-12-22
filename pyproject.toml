@@ -11,11 +11,11 @@ authors = ["Bilbottom"]
 readme = "README.md"
 keywords = ["sql", "sqlmesh", "duckdb"]
 repository = "https://github.com/Bilbottom/billiam-database"
-documentation = "https://bilbottom.github.io/billiam-database/#!/overview"
 package-mode = false
 
 [tool.poetry.dependencies]
 python = "~3.11"
+
 duckdb = "^1"
 python-dotenv = {extras = ["cli"], version = "^1"}
 sqlmesh = "0.139.0"  # pinned because of https://github.com/TobikoData/sqlmesh/issues/3555
@@ -27,58 +27,3 @@ dev.optional = false
 db-query-profiler = "^0.0.6"
 pre-commit = "^3"
 sqlmesh = {extras = ["web"], version = "*"}
-
-
-# https://docs.sqlfluff.com/en/stable/configuration.html#default-configuration
-[tool.sqlfluff.core]
-dialect = "duckdb"
-max_line_length = 120  # ...but try to stay under 80
-exclude_rules = [
-    "LT08",  # Blank line expected but not found after CTE closing bracket
-    "ST06",  # Select wildcards then simple targets before calculations and aggregates
-    "ST07",  # Prefer specifying join keys instead of using USING
-    "CV03",  # Trailing comma in select statement forbidden  (this is okay in DuckDB)
-]
-
-[tool.sqlfluff.indentation]
-indented_joins = true
-indented_using_on = true
-indented_on_contents = true
-template_blocks_indent = false
-
-###
-# Capitalisation bundle
-# https://docs.sqlfluff.com/en/stable/rules.html#capitalisation-bundle
-###
-
-# https://docs.sqlfluff.com/en/stable/rules.html#rule-capitalisation.keywords
-[tool.sqlfluff.rules.capitalisation.keywords]  # CP01
-capitalisation_policy = "lower"
-
-# https://docs.sqlfluff.com/en/stable/rules.html#rule-capitalisation.identifiers
-[tool.sqlfluff.rules.capitalisation.identifiers]  # CP02
-extended_capitalisation_policy = "lower"
-
-###
-# Layout bundle
-# https://docs.sqlfluff.com/en/stable/rules.html#layout-bundle
-###
-
-# https://docs.sqlfluff.com/en/stable/rules.html#rule-layout.indent
-[tool.sqlfluff.layout.type.indent]  # LT02
-line_position = "trailing"
-
-# https://docs.sqlfluff.com/en/stable/rules.html#rule-layout.commas
-[tool.sqlfluff.layout.type.comma]  # LT04
-line_position = "trailing"
-
-###
-# References bundle
-# https://docs.sqlfluff.com/en/stable/rules.html#references-bundle
-###
-
-# https://docs.sqlfluff.com/en/stable/rules.html#rule-references.quoting
-[tool.sqlfluff.rules.references.quoting]  # RF06
-prefer_quoted_identifiers = false
-prefer_quoted_keywords = true
-ignore_words = ["transaction", "date"]
