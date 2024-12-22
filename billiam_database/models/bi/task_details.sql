@@ -29,10 +29,7 @@ select
     min(log_ts) as start_time,
     max(log_ts) as end_time,
 from career.daily_tracker
--- noqa: disable=RF06, PRS
--- SQLFluff thinks that `GROUPING SETS` is a column name?!
 group by grouping sets (
     (project, detail),
     (project)
 );
--- noqa: enable=RF06, PRS

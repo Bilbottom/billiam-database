@@ -24,7 +24,6 @@ model (
 );
 
 
--- noqa: disable=RF05,RF06
 select
     "Transaction ID" as transaction_id,
     "Date"::date as transaction_date,
@@ -43,4 +42,4 @@ select
     trim("Description") as description,
     "Category split" as category_split,
 from 'billiam_database/models/raw/data/monzo_transactions.csv'
--- noqa: enable=RF05,RF06
+;

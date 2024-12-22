@@ -23,20 +23,18 @@ model (
 with recursive
 
 weeks(week_starting) as (
-    -- noqa: disable=LT02
         select date_trunc('week', (select min(from_date) from seeds.work_hours))
     union all
         select week_starting + interval '1 week'
         from weeks
         where week_starting < current_date - interval '1 week'
-    -- noqa: enable=LT02
 ),
 
 weekly_quota as (
     select
         from_date,
         coalesce(to_date, '9999-12-31') as to_date,
-        (0  -- noqa: LT02
+        (0
             + sunday
             + monday
             + tuesday
