@@ -12,7 +12,7 @@ model (
         transaction_id int,
         transaction_date date,
         item varchar,
-        cost decimal(18, 3),
+        cost decimal(18, 2),
         category varchar,
         counterparty varchar,
         payment_method varchar,

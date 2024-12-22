@@ -28,7 +28,6 @@ model (
         is_leap_year bool,
         is_day_weekday bool,
     ),
-
 );
 
 

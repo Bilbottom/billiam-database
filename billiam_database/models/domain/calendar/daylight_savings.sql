@@ -2,14 +2,12 @@ model (
     name calendar.daylight_savings,
     kind full,
     grain (region, year_number),
-    depends_on (calendar.calendar),
     columns (
         region             varchar,
         year_number        int,
         dst_start_time_utc timestamp,
         dst_end_time_utc   timestamp,
     ),
-
 );
 
 

@@ -8,7 +8,6 @@ model (
         title varchar,
         notes varchar,
     ),
-
 );
 
 

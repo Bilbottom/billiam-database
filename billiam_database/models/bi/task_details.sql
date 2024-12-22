@@ -1,5 +1,5 @@
 model (
-    name presentation.task_details,
+    name bi.task_details,
     kind full,
     grain (group_id, project, detail),
     columns (
@@ -12,28 +12,11 @@ model (
         start_time timestamp,
         end_time timestamp,
     ),
-    audits (
-      not_null(columns=[
-        group_id,
-        group_description,
-        project,
-        detail,
-        total_records,
-        total_time,
-        start_time,
-        end_time,
-      ]),
-      unique_combination_of_columns(columns=[
-        group_id,
-        project,
-        detail,
-      ]),
-    ),
 );
 
 
 select
-    grouping_id(project, detail)::integer as group_id,
+    grouping_id(project, detail)::int as group_id,
     case grouping_id(project, detail)
         when 0 then 'Task and detail'
         when 1 then 'Task only'
@@ -41,15 +24,15 @@ select
     project,
     coalesce(detail, '') as detail,
 
-    count(*)::integer as total_records,
-    sum(minutes)::integer as total_time,
-    min(date_time) as start_time,
-    max(date_time) as end_time,
-from raw.daily_tracker
+    count(*)::int as total_records,
+    sum(minutes)::int as total_time,
+    min(log_ts) as start_time,
+    max(log_ts) as end_time,
+from career.daily_tracker
 -- noqa: disable=RF06, PRS
 -- SQLFluff thinks that `GROUPING SETS` is a column name?!
 group by grouping sets (
     (project, detail),
     (project)
-)
+);
 -- noqa: enable=RF06, PRS
