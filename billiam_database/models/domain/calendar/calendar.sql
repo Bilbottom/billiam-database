@@ -1,0 +1,66 @@
+model (
+    name calendar.calendar,
+    kind full,
+    grain (date_dt),
+    columns (
+        date_dt date,
+        period_id int,
+        year_month int,
+        year_week int,
+        julian_date int,
+        ordinal_date int,
+        year_number int,
+        quarter_number int,
+        month_number int,
+        -- week_number int,
+        day_of_week_number int,
+        day_of_year_number int,
+        day_name varchar,
+        day_name_abbr varchar,
+        month_name varchar,
+        month_name_abbr varchar,
+        is_month_start bool,
+        is_month_end bool,
+        is_quarter_start bool,
+        is_quarter_end bool,
+        is_year_start bool,
+        is_year_end bool,
+        is_leap_year bool,
+        is_day_weekday bool,
+    ),
+
+);
+
+
+select
+    date_::date as date_dt,
+    strftime(date_dt, '%Y%m%d')::int as period_id,
+    strftime(date_dt, '%Y%m')::int as year_month,
+    extract('yearweek' from date_dt)::int as year_week,
+    strftime(date_dt, '%j')::int as julian_date,
+    strftime(date_dt, '%Y%j')::int as ordinal_date,
+    extract('year' from date_dt)::int as year_number,
+    extract('quarter' from date_dt)::int as quarter_number,
+    extract('month' from date_dt)::int as month_number,
+
+    /* Which of these should we use for the week number? */
+    -- extract('week' from date_dt)::int,
+    -- strftime(date_dt, '%W')::int,
+    -- strftime(date_dt, '%U')::int,
+
+    extract('dayofweek' from date_dt)::int as day_of_week_number,
+    extract('dayofyear' from date_dt)::int as day_of_year_number,
+    dayname(date_dt) as day_name,
+    dayname(date_dt)[:3] as day_name_abbr,
+    monthname(date_dt) as month_name,
+    monthname(date_dt)[:3] as month_name_abbr,
+    date_dt = date_trunc('month', date_dt) as is_month_start,
+    date_dt = date_trunc('month', date_dt) + interval '1 month -1 day' as is_month_end,
+    date_dt = date_trunc('quarter', date_dt) as is_quarter_start,
+    date_dt = date_trunc('quarter', date_dt) + interval '3 months -1 day' as is_quarter_end,
+    date_dt = date_trunc('year', date_dt) as is_year_start,
+    date_dt = date_trunc('year', date_dt) + interval '1 year -1 day' as is_year_end,
+    year_number % 4 = 0 as is_leap_year,
+    extract('dow' from date_dt) between 1 and 5 as is_day_weekday,
+from generate_series('1980-01-01'::date, '2099-12-31'::date, interval '1 day') as gs(date_)
+;
