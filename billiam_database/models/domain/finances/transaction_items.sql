@@ -1,5 +1,5 @@
 model (
-    name intermediate.transaction_items,
+    name finances.transaction_items,
     kind full,
     grain (row_id),
     columns (
@@ -20,11 +20,11 @@ select
     finances.transaction_date,
     finances.transaction_id,
     finances.item,
-    finances."cost",
+    finances.cost,
     finances.category,
     finances.counterparty,
     finances.exclusion_flag,
 from raw.finances
-    semi join intermediate.transactions
+    semi join finances.transactions
         using (transaction_id)
 order by finances.row_id

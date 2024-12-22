@@ -3,7 +3,6 @@ ci:
   autoupdate_schedule: quarterly
   skip:
     - poetry-lock
-    - sqlfluff-lint
 
 default_install_hook_types: ["pre-commit", "pre-push"]
 default_stages: ["pre-commit"]
@@ -50,11 +49,3 @@ repos:
     hooks:
       - id: prettier
         name: Make code pretty
-
-  - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 3.2.2
-    hooks:
-      - id: sqlfluff-lint
-        name: Lint SQL files
-        files: "^billiam_database/models/.*.sql$"
-        exclude: ".*" # Exclude all files for now

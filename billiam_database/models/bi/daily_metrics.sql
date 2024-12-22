@@ -1,5 +1,5 @@
 model (
-    name presentation.daily_metrics,
+    name bi.daily_metrics,
     kind full,
     grain (metric_date),
     columns (
@@ -12,36 +12,15 @@ model (
         meeting_proportion decimal(8, 4),
         working_day_meeting_proportion decimal(8, 4),
     ),
-    audits (
-      not_null(columns=[
-        metric_date,
-        total_cost,
-        non_essential_cost,
-        non_essential_cost_proportion,
-        total_working_time,
-        meeting_time,
-        meeting_proportion,
-        working_day_meeting_proportion,
-      ]),
-      unique_values(columns=[metric_date]),
-    ),
 );
 
 
-/*
-    Will break this down into smaller models later
-*/
-
-with recursive
+with
 
 date_dim as (
-    -- noqa: disable=LT02
-        select '2018-01-01'::date as metric_date
-    union all
-        select metric_date + interval 1 day
-        from date_dim
-        where metric_date < current_date
-    -- noqa: enable=LT02
+    select date_dt as metric_date
+    from calendar.calendar
+    where date_dt::date between '2018-01-01'::date and current_date
 ),
 
 daily_transactions as (
@@ -50,20 +29,20 @@ daily_transactions as (
         sum("cost") as total_cost,
         sum("cost") filter (where category not in ('Bills', 'Council Tax', 'Rent', 'Wage')) as non_essential_cost,
         @within(round(100.0 * non_essential_cost / total_cost, 4), 0, 100) as non_essential_cost_proportion,
-    from intermediate.transaction_items
+    from finances.transaction_items
     where not exclusion_flag
-    group by transaction_date
+    group by metric_date
 ),
 
 daily_work as (
     select
-        date_time::date as metric_date,
+        log_ts::date as metric_date,
         sum(minutes) as total_working_time,
         sum(minutes) filter (where project = 'Meetings') as meeting_time,
         round(100.0 * meeting_time / total_working_time, 4) as meeting_proportion,
         round(100.0 * meeting_time / least(total_working_time, 7.5 * 60), 4) as working_day_meeting_proportion,
-    from raw.daily_tracker
-    group by date_time::date
+    from career.daily_tracker
+    group by metric_date
 )
 
 select
@@ -81,4 +60,5 @@ from date_dim
         using (metric_date)
     left join daily_work
         using (metric_date)
-order by date_dim.metric_date
+order by metric_date
+;

@@ -1,5 +1,5 @@
 model (
-    name intermediate.transactions,
+    name finances.transactions,
     kind full,
     grain (transaction_id),
     columns (
@@ -8,17 +8,20 @@ model (
         cost decimal(18, 2),
         item_count int,
         counterparty varchar,
+        reimbursement_transaction_id int,
     ),
 );
 
 
 select
     transaction_id,
-    transaction_date,
-    round(sum("cost"), 2) as "cost",
+    any_value(transaction_date) as transaction_date,
+    sum(cost) as cost,
     count(*) as item_count,
     string_agg(distinct counterparty, '||') as counterparty,
+    any_value(reimbursement_transaction_id) as reimbursement_transaction_id,
 from raw.finances
-group by transaction_id, transaction_date
-having not (count(*) = 2 and round(sum("cost"), 2) = 0)  /* Exclude credit repayment transactions */
+where item != 'Credit Card Bill'  /* Exclude credit repayment transactions */
+group by transaction_id
 order by transaction_id
+;

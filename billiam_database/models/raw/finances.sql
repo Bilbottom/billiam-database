@@ -12,7 +12,7 @@ model (
         transaction_id int,
         transaction_date date,
         item varchar,
-        cost decimal(18, 3),
+        cost decimal(18, 2),
         category varchar,
         counterparty varchar,
         payment_method varchar,
@@ -36,7 +36,6 @@ model (
 );
 
 
--- noqa: disable=RF05,RF06
 select
     row_number() over () as row_id,  /* A pseudo row ID for maintaining uniqueness */
     "Transaction"::int as transaction_id,
@@ -49,7 +48,6 @@ select
     coalesce("Exclusion"::bool, false) as exclusion_flag,
     "Reimbursement Transaction"::int as reimbursement_transaction_id
 from 'billiam_database/models/raw/data/finances.csv'
--- noqa: enable=RF05,RF06
 ;
 
 

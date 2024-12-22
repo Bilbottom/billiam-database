@@ -1,6 +1,6 @@
 ---
-test__intermediate__transactions:
-  model: intermediate.transactions
+test__finances__transactions:
+  model: finances.transactions
   inputs:
     raw.finances:
       # prettier-ignore

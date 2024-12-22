@@ -1,20 +1,29 @@
 ---
-test__presentation__daily_metrics:
-  model: presentation.daily_metrics
+test__bi__daily_metrics:
+  model: bi.daily_metrics
   inputs:
-    raw.daily_tracker:
+    calendar.calendar:
       # prettier-ignore
-      - {date_time: "2018-01-01 08:15:00", project: "BAU Task", detail: "Task 1",    minutes: 15}
-      - {date_time: "2018-01-01 08:30:00", project: "BAU Task", detail: "Task 2",    minutes: 15}
-      - {date_time: "2018-01-02 08:45:00", project: "BAU Task", detail: "Task 3",    minutes: 15}
-      - {date_time: "2018-01-02 09:00:00", project: "Meetings", detail: "Something", minutes: 15}
-    intermediate.transaction_items:
+      - {date_dt: "2017-12-31"}
+      - {date_dt: "2018-01-01"}
+      - {date_dt: "2018-01-02"}
+      - {date_dt: "2018-01-03"}
+      - {date_dt: "2018-01-04"}
+      - {date_dt: "2018-01-05"}
+      - {date_dt: "2018-01-06"}
+    finances.transaction_items:
       # prettier-ignore
       - {row_id: 1, transaction_id: 1, transaction_date: "2018-01-01", item: "Item 1", cost: 2.99, category: "Food", counterparty: "Tesco",    exclusion_flag: false}
       - {row_id: 2, transaction_id: 1, transaction_date: "2018-01-01", item: "Item 2", cost: 3.99, category: "Rent", counterparty: "Landlord", exclusion_flag: false}
       - {row_id: 3, transaction_id: 2, transaction_date: "2018-01-02", item: "Item 3", cost: 4.99, category: "Food", counterparty: "Tesco",    exclusion_flag: false}
       - {row_id: 4, transaction_id: 3, transaction_date: "2018-01-03", item: "Item 4", cost: 5.99, category: "Food", counterparty: "Tesco",    exclusion_flag: true}
       - {row_id: 5, transaction_id: 4, transaction_date: "2018-01-04", item: "Item 5", cost: 6.99, category: "Rent", counterparty: "Landlord", exclusion_flag: false}
+    career.daily_tracker:
+      # prettier-ignore
+      - {log_ts: "2018-01-01 08:15:00", project: "BAU Task", detail: "Task 1",    minutes: 15}
+      - {log_ts: "2018-01-01 08:30:00", project: "BAU Task", detail: "Task 2",    minutes: 15}
+      - {log_ts: "2018-01-02 08:45:00", project: "BAU Task", detail: "Task 3",    minutes: 15}
+      - {log_ts: "2018-01-02 09:00:00", project: "Meetings", detail: "Something", minutes: 15}
   outputs:
     query:
       # prettier-ignore
