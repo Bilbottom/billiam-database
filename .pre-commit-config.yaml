@@ -1,8 +1,7 @@
 ---
 ci:
   autoupdate_schedule: quarterly
-  skip:
-    - poetry-lock
+  skip: ["identity", "poetry-lock"]
 
 default_install_hook_types: ["pre-commit", "pre-push"]
 default_stages: ["pre-commit"]
