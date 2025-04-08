@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "billiam-database"
 version = "0.0.0"
@@ -5,27 +9,25 @@ description = "OLAP database project for life admin."
 authors = [{name = "Bilbottom"}]
 readme = "README.md"
 keywords = ["sql", "sqlmesh", "duckdb"]
-repository = "https://github.com/Bilbottom/billiam-database"
-requires-python = ">=3.11,<4.0"
-dynamic = ["dependencies"]
+requires-python = ">=3.11"
+dependencies = [
+    "duckdb>=1.0.0",
+    "python-dotenv[cli]>=1.1.0",
+    "sqlmesh>=0.171.0",
+]
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "coverage-badge>=1.1.0",
+    "db-query-profiler>=0.0.6",
+    "pre-commit>=4.1.0",
+    "sqlmesh[web]",
+]
+test = [
+    "pytest>=8.3.5",
+    "pytest-cov>=6.0.0",
+]
 
 
-[tool.poetry]
-package-mode = false
-
-[tool.poetry.dependencies]
-duckdb = "^1"
-python-dotenv = {extras = ["cli"], version = "^1"}
-sqlmesh = "0.139.0"  # pinned because of https://github.com/TobikoData/sqlmesh/issues/3555
-
-[tool.poetry.group]
-dev.optional = false
-
-[tool.poetry.group.dev.dependencies]
-db-query-profiler = "^0.0.6"
-pre-commit = "^3"
-sqlmesh = {extras = ["web"], version = "*"}
+[tool.setuptools.packages.find]
+include = ["billiam_database"]

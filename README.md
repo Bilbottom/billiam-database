@@ -1,7 +1,7 @@
 <div align="center">
 
-[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
-[![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 [![Docker](https://img.shields.io/badge/Docker-24.0.6-blue.svg)](https://www.docker.com/)
 [![tests](https://github.com/Bilbottom/billiam-database/actions/workflows/tests.yaml/badge.svg)](https://github.com/Bilbottom/billiam-database/actions/workflows/tests.yaml)
 [![GitHub last commit](https://img.shields.io/github/last-commit/Bilbottom/billiam-database)](https://shields.io/badges/git-hub-last-commit)
@@ -40,21 +40,18 @@ Since this is a personal project, I don't expect anyone else to do this, but I'm
 
 This project requires the following three tools to be installed:
 
-- [Python](https://www.python.org/downloads/release/python-3110/)
-- [Poetry](https://python-poetry.org/)
+- [Python](https://www.python.org/downloads/)
+- [uv](https://docs.astral.sh/uv/getting-started/installation/)
 - [Docker](https://www.docker.com/) (only if you want to use [Metabase](https://www.metabase.com/))
 
-The required versions are specified in the badges at the top of this README, and also in:
-
-- [pyproject.toml](pyproject.toml)
-- [poetry.lock](poetry.lock)
+The required versions are specified in the badges at the top of this README.
 
 ### Installation (SQLMesh)
 
 After cloning the repo, install the dependencies and enable [pre-commit](https://pre-commit.com/):
 
 ```shell
-poetry install
+uv sync --all-groups
 pre-commit install --install-hooks
 ```
 
